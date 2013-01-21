@@ -23,6 +23,8 @@ version    = '0.13.01.21.1'
 running    = True
 # Screen state sent from server
 screen     = {}
+
+# various
 staticroot = utils.path_for('static')
 config     = utils.get_config(os.path.join(utils.path_for('data'),'config.json'))
 ip_address = utils.get_ip_address(config.interface)
@@ -40,8 +42,6 @@ if __name__=='__main__':
     # Set up logging
     logging.config.dictConfig(json.loads(str(config.logging)))
     log = logging.getLogger()
-
-    print log.handlers
 
     log.info("Starting application.")
 
