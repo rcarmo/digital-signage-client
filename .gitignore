@@ -1,3 +1,7 @@
+# Mac stuff
+.DS_Store
+
+# Python objects
 *.py[cod]
 
 # C extensions
