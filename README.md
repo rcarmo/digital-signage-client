@@ -24,7 +24,7 @@ Here's a brief summary of the requirements and their impact on solution design:
   running this against a set of web services or a full web server that will 
   render pages to the devices.
 
-- clients therefore run "playlists" that JSON files listing URLs to render locally.
+- clients therefore run "playlists", i.e. JSON files listing URLs to render locally.
   Playlists can contain URLs to HTML content of various descriptions or to video files,
   and support time intervals and simple "random" groups.
 
