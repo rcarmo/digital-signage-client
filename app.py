@@ -84,4 +84,4 @@ if __name__=='__main__':
         b.do(config.command['local'] % 'nonet')
         log.error("Failsafe mode")
 
-    bottle.run(port=port,host=host,debug=config.debug)
+    bottle.run(port=port,host=host,debug=config.debug,reloader=config.debug)
