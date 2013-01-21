@@ -1,0 +1,43 @@
+{
+    "playlist": {
+        "name": "default",
+        "screens": [
+            { "uri": "/brand",        "duration": 15 },
+            { "random": "sponsors" },
+            { "uri": "/tweets",       "duration": 25 },
+            { "uri": "/news/codebits","duration": 25 },
+            { "random": "pixelart" },
+            { "uri": "/stages",       "duration": 10 },
+            { "uri": "/stage/m/info", "duration": 10 },
+            { "uri": "/stage/a/info", "duration": 10 },
+            { "uri": "/stage/b/info", "duration": 10 },
+            { "uri": "/stage/c/info", "duration": 10 },
+            { "uri": "/stages",       "duration": 10 },
+            { "uri": "/tshirts",      "duration": 10 },
+            { "uri": "/brand",        "duration": 15 },
+            { "uri": "/dens",         "duration": 10 },
+            { "uri": "/den/1/info",   "duration": 10 },
+            { "uri": "/den/2/info",   "duration": 10 },
+            { "random": "pixelart" },
+            { "uri": "/news/sapo",    "duration": 25 },
+            { "uri": "/photos",       "duration": 25 },
+            { "random": "video" },
+            { "uri": "/tshirts",      "duration": 10 },
+            { "random": "meme" }
+        ],
+        "random": {
+            "pixelart": [
+                { "uri": "/pixelart", "duration": 10 }
+            ],
+            "meme": [
+                { "uri": "/tshirts",         "duration": 10 },
+                { "uri": "/pixelart",        "duration": 10 },
+                { "uri": "/hype/mario.html", "duration": 12 },
+                { "uri": "/qrcode",          "duration": 10 }
+            ],
+            "video": [
+                { "file": "http://remote.host/movie.mp4" }
+            ]
+        }
+    }
+}

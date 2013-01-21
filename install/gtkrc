@@ -1,0 +1,19 @@
+
+style "scrollbar" {
+	GtkScrollbar::slider-width = 0
+}
+class "Gtk*Scrollbar" style "scrollbar"
+
+
+style "resize-grip" {
+	GtkWindow::resize-grip-height = 0
+	GtkWindow::resize-grip-width = 0
+}
+class "GtkWindow*" style "resize-grip"
+
+
+style "uzbl" { 
+  GtkRange::slider-width = 0
+  GtkRange::trough-border = 0
+}
+widget "Uzbl*" style "uzbl"

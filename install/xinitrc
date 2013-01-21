@@ -1,0 +1,7 @@
+xset s off
+xset -dpms
+unclutter -root -idle 1 &
+while true; do
+  python ~/signage/app.py 2>&1 >> /tmp/bottle.log
+  sleep 1
+done

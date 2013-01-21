@@ -1,0 +1,33 @@
+/* Inspired by http://www.broken-links.com/tests/animations/ */
+@-webkit-keyframes neonglow {
+    20%, 70% {
+        color: red;
+        text-shadow: none;
+    }
+    25%, 50%, 75%, 95% {
+        color: #fff;
+        text-shadow: 0 0 5px #fff, 0 0 10px #ff0, 0 0 15px #ff0;
+    }
+    55% {
+        color: red;
+        text-shadow: none;
+    }
+}
+@-webkit-keyframes ontheblink {
+    21%, 39%, 45%, 47%, 53% {
+        color: red;
+        text-shadow: none;
+    }
+    26%, 38%, 40%, 44%, 46%, 48% {
+        color: #fff;
+        text-shadow: 0 0 5px #fff, 0 0 10px #ff0, 0 0 15px #ff0;
+    }
+}
+.neon {
+    -webkit-animation: neonglow 10s infinite;
+    color: red;
+}
+.blink {
+    -webkit-animation: ontheblink 10s infinite;
+}
+

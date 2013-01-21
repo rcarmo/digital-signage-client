@@ -1,0 +1,59 @@
+{
+    "debug": true,
+    "staging": true,
+    "interface": "eth0",
+    "platform": "pi",
+    "http": {
+        "bind_address": "127.0.0.1",
+        "port"        : 8000
+    },
+    "__comment": "if server_url is not set, we'll operate in standalone mode",
+    "server_url": "http://signage.local/api/beacon",
+    "screen": {
+        "__comment": "default resolution we'll be running at",
+        "width": 1280,
+        "height": 720
+    },
+    "feeds": {
+        "__comment": "service feed examples",
+        "photos"  : "http://services.sapo.pt/Photos/RSS/pesquisa/?termos=codebits2012&o=maisrecentes&limit=40",
+        "codebits": "https://codebits.eu/rss",
+        "sapo"    : "http://noticias.sapo.pt/rss/news/"
+    },
+    "uzbl": {
+        "__comment": "command patterns to make it easier to control uzbl-core",
+        "local": "set uri = http://%(host)s:%(port)d/%(page)s",
+        "uri"  : "set uri = %(uri)s", 
+        "ram": {
+            "hard_limit": 114688,
+            "soft_limit": 98304   
+        }
+    },
+    "logging": {
+        "version": 1,
+        "formatters": {
+            "http": {
+                "format" : "localhost - - [%(asctime)s] %(process)d %(levelname)s %(message)s",
+                "datefmt": "%Y/%m/%d %H:%M:%S"
+            }
+        },
+        "handlers": {
+            "console": {
+                "class"    : "logging.StreamHandler",
+                "formatter": "http",
+                "level"    : "DEBUG",
+                "stream"   : "ext://sys.stdout"
+            },
+            "ram": {
+                "class"    : "utils.InMemoryHandler",
+                "formatter": "http",
+                "level"    : "WARNING",
+                "limit"    : 200
+            }
+        },
+        "root": {
+            "level"   : "DEBUG",
+            "handlers": ["ram","console"]
+        }
+    }
+}

@@ -1,0 +1,139 @@
+* {
+   /* uzbl handles this fairly well, and it's a must to prevent jaggies on some TVs */
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* This is a little extra tweak that helps hide scrollbars, for corner cases where
+ * the provided uzbl config file and userstyle.css might be misplaced */
+
+::-webkit-scrollbar {
+  display: none;
+} 
+
+::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+/* We prefer Roboto for signage - it is very readable in all kinds of
+ * displays and various resolutions */
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: url('../fonts/Roboto-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto-Bold-Condensed';
+  src: url('../fonts/Roboto-BoldCondensed.ttf') format('truetype');
+}
+
+body {
+  background-color: #000;
+  color: white;
+  margin: 0;
+  padding: 0;
+  text-align: left; 
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url(../img/gradient.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  font-family: "Roboto", Arial, sans-serif;
+  display: -webkit-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto-Bold";
+}
+
+.alert {
+  font-family: "Roboto-Bold-Condensed";
+}
+
+
+/* common elements */
+
+.message {
+    margin: 32px;
+    text-align: left;
+    font-size: 48px;
+}
+
+#title {
+    left: 210px;
+    top: 20px;
+    height: 140px;
+    display: table;
+    letter-spacing: -2px;
+    font-family: 'Gotham-Black';
+    font-size: 110px;
+    line-height: 140px;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    -webkit-line-clamp: 1;
+}
+
+#panel {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    margin: auto;
+}
+
+.branding {
+    padding: 24px; 
+    font-family: "Roboto-Bold";
+    font-size: 120px;
+}
+
+#panel .number {
+    font-size: 120px;
+}
+
+/* specifics */
+
+#qrholder {
+    top: 165px;
+    left: 40px;
+    width: 560px;
+    height: 560px;
+    background-color: #fff;
+}
+
+
+#pixelart {
+   height: 700px;
+   width: auto;
+   /* this switches off image smoothing */
+   image-rendering: -webkit-optimize-contrast;
+}
+
+
+/* debug frames */
+
+.frame1024 {
+    position: absolute;
+    border: 1px dotted yellow;
+    top: 0;
+    left: 0;
+    width: 1024;
+    height: 768;
+}
+
+.frame1280 {
+    position: absolute;
+    border: 1px dotted orange;
+    top: 0;
+    left: 0;
+    width: 1280;
+    height: 720;
+}

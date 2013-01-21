@@ -1,0 +1,24 @@
+Add these:
+
+# config.txt #
+framebuffer_width=1280
+framebuffer_height=720
+
+
+# rc.local #
+fbset -xres 1280 -yres 720
+sudo -u pi startx
+
+
+# config.txt #
+framebuffer_width=1024
+framebuffer_height=768
+disable_overscan=1
+hdmi_group=1
+hdmi_mode=16
+
+
+# rc.local #
+fbset -xres 1024 -yres 768
+sudo -u pi startx
+
