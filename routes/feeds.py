@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Routes for RSS feeds and other proxied urls
+
+Created by: Rui Carmo
+License: MIT (see LICENSE for details)
+"""
 
 import os, sys, logging
 
