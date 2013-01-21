@@ -1,4 +1,11 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Routes for local static content
+
+Created by: Rui Carmo
+License: MIT (see LICENSE for details)
+"""
 
 import os, sys, logging
 from bottle import app, route, static_file, view
