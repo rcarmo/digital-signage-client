@@ -49,8 +49,7 @@ Here's a brief summary of the requirements and their impact on solution design:
 
 
 
-INSTALLATION
-============
+## INSTALLATION
 
 The following steps assume you're deploying on the [Raspberry Pi][rpi]:
 
@@ -91,5 +90,12 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
 
 * reboot
 
+## FURTHER READING
+
+[The original blog post][b1], wherein you'll find some screenshots of the server.
+
+A few photos of this in action: [1](http://fotos.sapo.pt/ndantas/fotos/?uid=HrC41nF3vZfkMA16utoZ), [2](http://fotos.sapo.pt/ndantas/fotos/?uid=9zWgzUQMIwp9NkfMSq1i), [3](http://fotos.sapo.pt/ndantas/fotos/?uid=7ZZZgiyiUhmarZbCzM6p), [4](http://fotos.sapo.pt/ndantas/fotos/?uid=QB91ymIZmvByPuKQ1rwj), [5](http://fotos.sapo.pt/ndantas/fotos/?uid=9zWgzUQMIwp9NkfMSq1i), [6](http://fotos.sapo.pt/rcarmo/fotos/?uid=iznSQ4TuNFKtcpNBdQWS).
+
 [cb]: https://codebits.eu
 [rpi]: http://www.raspberrypi.org
+[b1]: https://codebits.eu/s/blog/c89f80ca02910f48ac4cede8c3ce5cd7
