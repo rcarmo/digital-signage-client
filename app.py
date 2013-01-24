@@ -72,7 +72,7 @@ if __name__=='__main__':
             p.start()
         try:
             assert('http' in config.server_url)
-            b = beacon.Beacon(config, utils.get_mac_address(), ip_address, u)
+            b = beacon.Beacon(config, utils.get_mac_address(config.interface), ip_address, u)
             log.info("Starting beacon thread")
             b.start()
         except Exception, e:
