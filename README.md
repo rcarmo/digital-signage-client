@@ -28,6 +28,9 @@ Here's a brief summary of the requirements and their impact on solution design:
   Playlists can contain URLs to HTML content of various descriptions or to video files,
   and support time intervals and simple "random" groups.
 
+- the server can push new content to the client in near-realtime (depending on content type),
+  including whole new playlists.
+
 - communication between client and server was downgraded from websockets to an 
   HTTP(S) polling mechanism to better cope with firewalls, NAT, timeouts, etc.
 
@@ -36,7 +39,10 @@ Here's a brief summary of the requirements and their impact on solution design:
   _something_, and cache some information in the meantime)
 
 - we had no idea what displays would be available, so we settled on 1280x720
-  as default and 1024x768 as a fallback
+  as default and 1024x768 as a fallback. 1920x1080 is possible, but you'll be stretching
+  the hardware to the limits when rendering HTML locally so it's not advisable
+  (plus most people can't tell the difference when you're projecting or viewing from
+  afar).
 
 - resolution is _explicitely_ set on views to make it easier to size and 
   position both HTML and SVG elements (the [Codebits][cb] layouts were extensively
@@ -46,7 +52,6 @@ Here's a brief summary of the requirements and their impact on solution design:
   set in `/boot/config.txt` as well as using `fbset` (and even then we make
   sure `uzbl` is launched with the `geometry` option to clip the rendering
   surface)
-
 
 
 ## INSTALLATION
@@ -60,8 +65,6 @@ The following steps assume you're deploying on the [Raspberry Pi][rpi]:
 
 * edit `/boot/config.txt` to set the framebuffer to 1280x720
 
-* change password
-
 * edit `/etc/rc.local` to include these lines before the final command:
 
         fbset --xres 1280 --yres 720
@@ -74,6 +77,8 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
 * run `install/deploy.sh` to setup the configuration files
 
 * **OPTIONAL**: change `sshd` to run on another port (even with `denyhosts`, it makes sense for some deployments) or block port 22 access from everywhere but the address(es) you'll be managing these from.
+
+* **RECOMMENDED:** change the password for the `pi` user.
 
 * **RECOMMENDED**: Disable `sshd` password authentication and add your public key to `/home/pi/.ssh/authorized_keys`.
 
