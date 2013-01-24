@@ -9,7 +9,7 @@ License: MIT (see LICENSE for details)
 
 import os, sys, time, threading, json, random, logging, subprocess
 from Queue import Queue, Empty
-import app, beacon, utils, config, browser
+import app, beacon, utils, browser
 
 log = logging.getLogger()
 
