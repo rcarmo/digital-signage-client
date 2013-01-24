@@ -12,15 +12,15 @@ from bottle import app, route, static_file, view
 
 log = logging.getLogger()
 
-import utils, config
+import utils
 
 @route('/')
 def index():
     """Index page"""
-    return static_file('index.html', root=config.staticroot)
+    return static_file('index.html', root=app.config.staticroot)
 
 @route('<filepath:path>')
 def static(filepath):
     """Handles all the remanining static files"""
-    return static_file(filepath, root=config.staticroot)
+    return static_file(filepath, root=app.config.staticroot)
 
