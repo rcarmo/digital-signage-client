@@ -144,7 +144,12 @@ def get_uptime():
 
 
 def get_mac_address(dev="eth0"):
-    """Retrieves the MAC address from the /sys virtual filesystem - will only work on Linux."""
+    # if we're running this in Mac OS X (for staging, etc.)
+    if 'Darwin' in platform.system():
+        ifconfig = subprocess.Popen('ifconfig %s' % dev, shell=True, stdout=subprocess.PIPE)
+        return filter(lambda x: 'ether' in x.strip(), ifconfig.stdout.readlines())[0].split()[1]
+
+    # else assume we're doing in Linux and get it from /sys
     return open('/sys/class/net/%s/address' % dev,'r').read().strip()
 
 
