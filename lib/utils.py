@@ -13,9 +13,6 @@ import socket, fcntl, struct, platform
 
 log = logging.getLogger()
 
-# URL shortener cache
-_cache = {}
-
 class JSONStruct:
   """Recursively build objects from a dict."""
 
@@ -63,16 +60,31 @@ class InMemoryHandler(logging.Handler):
         return records
 
 
+def memoize(f):
+    """Memoization decorator for functions taking one or more arguments"""
+
+    class memodict(dict):
+        def __init__(self, f):
+            self.f = f
+
+        def __call__(self, *args):
+            return self[args]
+
+        def __missing__(self, key):
+            ret = self[key] = self.f(*key)
+            return ret
+    return memodict(f)
+
+
+@memoize
 def shorten(url):
     """Minimalist URL shortener using SAPO services"""
-    if url not in _cache:
-        u = '?'.join(('http://services.sapo.pt/PunyURL/GetCompressedURLByURL',urllib.urlencode({'url':url})))
-        try:
-            x = xml.dom.minidom.parseString(urllib2.urlopen(u).read())
-            _cache[url] = x.getElementsByTagName('ascii')[0].firstChild.data
-        except:
-            _cache[url] = url
-    return _cache[url]
+    u = '?'.join(('http://services.sapo.pt/PunyURL/GetCompressedURLByURL',urllib.urlencode({'url':url})))
+    try:
+        x = xml.dom.minidom.parseString(urllib2.urlopen(u).read())
+        return x.getElementsByTagName('ascii')[0].firstChild.data
+    except:
+        return url
 
 
 def valid_mac_address(addr):
@@ -140,11 +152,20 @@ def get_cpu_temp(cpu='cpu0'):
 
 def get_uptime():
     """Retrieves the system uptime, in seconds"""
+
+    # if we're running this in Mac OS X (for staging, etc.)
+    if 'Darwin' in platform.system():
+        sysctl = subprocess.Popen('sysctl kern.boottime', shell=True, stdout=subprocess.PIPE)
+        return time.time() - float(re.match('kern.boottime:\D+(\d+)', sysctl.stdout.read()).group(1))
+
+    # else assume we're doing in Linux and get it from /proc
     return float(open('/proc/uptime', 'r').read().split(' ')[0])
 
 
+@memoize
 def get_mac_address(dev="eth0"):
     """Retrieves the MAC address for a given interface"""
+
     # if we're running this in Mac OS X (for staging, etc.)
     if 'Darwin' in platform.system():
         ifconfig = subprocess.Popen('ifconfig %s' % dev, shell=True, stdout=subprocess.PIPE)
@@ -154,6 +175,7 @@ def get_mac_address(dev="eth0"):
     return open('/sys/class/net/%s/address' % dev,'r').read().strip()
 
 
+@memoize
 def get_ip_address(dev="eth0"):
     """Retrieves the IP address for a given interface"""
 
