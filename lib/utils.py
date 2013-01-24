@@ -7,9 +7,11 @@ Created by: Rui Carmo
 License: MIT (see LICENSE for details)
 """
 
-import os, sys, time, re, subprocess, urllib, urllib2
+import os, sys, time, re, logging, subprocess, urllib, urllib2
 import json, xml.dom.minidom
 import socket, fcntl, struct
+
+log = logging.getLogger()
 
 # URL shortener cache
 _cache = {}
