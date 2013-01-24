@@ -144,6 +144,7 @@ def get_uptime():
 
 
 def get_mac_address(dev="eth0"):
+    """Retrieves the MAC address for a given interface"""
     # if we're running this in Mac OS X (for staging, etc.)
     if 'Darwin' in platform.system():
         ifconfig = subprocess.Popen('ifconfig %s' % dev, shell=True, stdout=subprocess.PIPE)
