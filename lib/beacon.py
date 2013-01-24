@@ -126,7 +126,7 @@ class Beacon(threading.Thread):
 
     def do_report_ip(self, item):
         """Handle the locate/report_ip action by queueing an URL view"""
-        queue.put({'uri': self.local_uri = 'locate', 'duration': item })
+        queue.put({'uri': self.local_uri + 'locate', 'duration': item })
 
 
     def run(self):
