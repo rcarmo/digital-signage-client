@@ -71,12 +71,12 @@ if __name__=='__main__':
             log.info("Starting player thread")
             p.start()
         try:
-            assert(config.server_url)
+            assert('http' in config.server_url)
             b = beacon.Beacon(config, utils.get_mac_address(), ip_address, u)
             log.info("Starting beacon thread")
             b.start()
-        except:
-            log.info("Server URL not set, operating in standalone mode")
+        except Exception, e:
+            log.info("%s, operating in standalone mode." % e)
             pass
     else:
         # Signal for help and stay put. There's no point in debugging the LAN ourselves.
