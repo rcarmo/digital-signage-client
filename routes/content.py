@@ -9,7 +9,7 @@ License: MIT (see LICENSE for details)
 
 import os, sys, logging, random
 import bottle
-import app, proxy, config, utils
+import app, proxy, utils
 
 log = logging.getLogger()
 
@@ -37,31 +37,6 @@ def textmessage():
     })
     app.template_vars.update(app.screen)
     return app.template_vars
-
-
-@bottle.route('/tshirts')
-@bottle.view('screens/tshirts')
-def tshirts():
-    """Renders the pixelart view"""
-    return {
-        'number': random.choice(range(1,8)),
-        'width': config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
-
-
-@bottle.route('/tshirts/<number:int>')
-@bottle.view('screens/tshirts')
-def tshirts(number):
-    """Renders the pixelart view"""
-    return {
-        'number': number,
-        'width': config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
-
 
 
 @bottle.route('/pixelart')
