@@ -9,7 +9,7 @@ License: MIT (see LICENSE for details)
 
 import os, sys, time, re, logging, subprocess, urllib, urllib2
 import json, xml.dom.minidom
-import socket, fcntl, struct
+import socket, fcntl, struct, platform
 
 log = logging.getLogger()
 
@@ -149,7 +149,14 @@ def get_mac_address(dev="eth0"):
 
 
 def get_ip_address(dev="eth0"):
-    """Retrieves the IP address via SIOCGIFADDR - only tested on Linux."""
+    """Retrieves the IP address for a given interface"""
+
+    # if we're running this in Mac OS X (for staging, etc.)
+    if 'Darwin' in platform.system():
+        ipconfig = subprocess.Popen('ipconfig getifaddr %s' % dev, shell=True, stdout=subprocess.PIPE)
+        return ipconfig.stdout.read().strip()
+
+    # else assume we're doing it in Linux and do it via SIOCGIFADDR
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         return socket.inet_ntoa(fcntl.ioctl(s.fileno(),0x8915,struct.pack('256s', dev[:15]))[20:24])
