@@ -22,7 +22,7 @@ def qrcode():
         'title'  : 'DECODE THIS',
         'code'   : 'https://codebits.eu',
         'message': 'Have you checked out the site lately?',
-    )}
+    })
     app.template_vars.update(app.screen)
     return app.template_vars
 
@@ -34,7 +34,7 @@ def textmessage():
     app.template_vars.update({
         'title'  : 'ATTENTION',
         'message': 'This is a generic waening message',
-    }
+    })
     app.template_vars.update(app.screen)
     return app.template_vars
 
