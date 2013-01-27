@@ -135,12 +135,16 @@ def get_cpu_usage(interval=0.1):
 
 def get_cpu_freq(cpu='cpu0'):
     """Retrieves the current CPU speed in MHz - for a single CPU"""
-    return float(open('/sys/devices/system/cpu/%s/cpufreq/scaling_cur_freq' % cpu,'r').read().strip())/1000.0
+    if 'Linux' in platform.system():
+        return float(open('/sys/devices/system/cpu/%s/cpufreq/scaling_cur_freq' % cpu,'r').read().strip())/1000.0
+    return 0
 
 
 def get_cpu_temp(cpu='cpu0'):
     """Retrieves the current CPU core temperature in degrees Celsius - specific to the Raspberry Pi"""
-    return float(open('/sys/class/thermal/thermal_zone%s/temp' % cpu[-1],'r').read().strip())/1000.0
+    if 'Linux' in platform.system():
+        return float(open('/sys/class/thermal/thermal_zone%s/temp' % cpu[-1],'r').read().strip())/1000.0
+    return 0
 
 
 def get_uptime():
@@ -207,3 +211,4 @@ def validate_resolution(config):
         if '"1024x768"' in res.stdout.read().split():
             config.screen.width = 1024
             config.screen.height = 768
+    return config
