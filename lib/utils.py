@@ -198,3 +198,12 @@ def get_config(filename):
 def path_for(name):
     """Build relative paths to current script"""
     return os.path.join(os.path.dirname(sys.argv[0]),name)
+
+def validate_resolution(config):
+    """If we're running on Linux, try to figure out what the display's set to"""
+    if 'Linux' in platform.system():
+        res = subprocess.Popen('fbset', stdout=subprocess.PIPE, stderr=open(os.devnull,'wb'), shell=True)
+        # We're only going to account for one other case here
+        if '"1024x768"' in res.stdout.read().split():
+            config.screen.width = 1024
+            config.screen.height = 768
