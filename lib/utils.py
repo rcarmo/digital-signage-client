@@ -13,29 +13,22 @@ import socket, fcntl, struct, platform
 
 log = logging.getLogger()
 
-class JSONStruct:
-  """Recursively build objects from a dict."""
+class Struct(dict):
+    """An object that recursively builds itself from a dict and allows easy access to attributes"""
 
-  def __init__(self, obj):
-    for k, v in obj.iteritems():
-      if isinstance(v, dict):
-        setattr(self, k, JSONStruct(v))
-      else:
-        setattr(self, k, v)
+    def __init__(self, obj):
+        dict.__init__(self, obj)
+        for k, v in obj.iteritems():
+            if isinstance(v, dict):
+                self.__dict__[k] = Struct(v)
+            else:
+                self.__dict__[k] = v
 
-  def __getitem__(self, val):
-    return self.__dict__[val]
-
-  def __item_repr__(self, item):
-    if type(item) in [list]:
-        return '[%s]' % ','.join(map(lambda x: self.__item_repr__(x), item))
-    elif type(item) in [str,unicode]:
-        return '"%s"' % item
-    return repr(item)
-
-  def __repr__(self):
-    return '{%s}' % str(', '.join('"%s": %s' % (k, self.__item_repr__(v)) for (k, v) in self.__dict__.iteritems()))
-
+    def __getattr__(self, attr):
+        try:
+            return self.__dict__[attr]
+        except KeyError:
+            raise AttributeError(attr)
 
 class InMemoryHandler(logging.Handler):
     """In memory logging handler with a circular buffer"""
@@ -195,7 +188,7 @@ def get_ip_address(dev="eth0"):
 def get_config(filename):
     """Parses the configuration file."""
     try:
-        config = JSONStruct(json.load(open(filename, 'r')))
+        config = Struct(json.load(open(filename, 'r')))
     except Exception, e:
         print 'Error loading configuration file %s: %s' % (filename, e)
         sys.exit(2)
