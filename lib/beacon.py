@@ -13,7 +13,7 @@ import json, threading, subprocess
 from Queue import Queue, Empty
 
 # our own libraries
-import utils, proxy, browser
+import app, utils, proxy, browser
 
 log = logging.getLogger()
 
@@ -131,7 +131,7 @@ class Beacon(threading.Thread):
 
     def run(self):
         """Thread main loop"""
-        while(config.running):
+        while(app.running):
             try:
                 time.sleep(self.poll_interval)
                 log.debug("Calling home...")
