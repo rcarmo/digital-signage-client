@@ -101,60 +101,6 @@ def newsfrom(name):
         'height': config.height,
         'debug': config.debug
     }
-
-
-@bottle.route('/stages')
-@bottle.view('screens/stages')
-def all_stages():
-    return {
-        'stage':'',
-        'width':  config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
-
-
-@bottle.route('/stage/<name>')
-@bottle.view('screens/stages')
-def stage(name):
-    return {        
-        'stage':  name.upper()[0],
-        'width':  config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
-
-
-@bottle.route('/stage/<name>/info')
-@bottle.view('screens/stageinfo')
-def stage(name):
-    return {
-        'stage':  name.upper()[0],
-        'width':  config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
-    
-
-@bottle.route('/dens')
-@bottle.view('screens/dens')
-def all_dens():
-    return {
-        'width':  config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
-
-
-@bottle.route('/den/<name>/info')
-@bottle.view('screens/deninfo')
-def den(name):
-    return {
-        'den': name,
-        'width':  config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
     
 
 @bottle.route('/brand')
