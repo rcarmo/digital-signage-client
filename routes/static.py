@@ -8,7 +8,7 @@ License: MIT (see LICENSE for details)
 """
 
 import os, sys, logging
-from bottle import qroute, static_file, view
+from bottle import route, static_file, view
 
 log = logging.getLogger()
 
