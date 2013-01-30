@@ -7,7 +7,6 @@
         });
     });
 </script>
-%include svg/simple width=width, height=height, img='ohaiqr.png'
 <div id="title" class="fixed">{{title}}</div>
 <div id="qrholder" class="fixed vcenter" style="text-align: center;">
     <p><div id="qrcode"></div></p>
