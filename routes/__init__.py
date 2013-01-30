@@ -12,7 +12,7 @@ import os, sys, logging, inspect, json, cgi
 sys.path.append('../lib')
 log = logging.getLogger()
 
-from bottle import route, view
+from bottle import route, view, app as bottle_default_app
 import app, utils
 
 # import all other routes
@@ -25,7 +25,7 @@ import static, feeds, content
 def index():
     """Renders the initial screen"""
     app.template_vars.update({
-        'title' : 'Status',
+        'title' : 'Startup Screen',
     })
     return app.template_vars
 
@@ -54,6 +54,7 @@ def no_network():
 def dump_debug():
     """Dumps active routes"""
     app.template_vars.update({
-        'title': 'Debug information'
+        'title': 'Debug information',
+        'modules': utils.docs(bottle_default_app())
     })
     return app.template_vars

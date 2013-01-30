@@ -9,7 +9,7 @@ License: MIT (see LICENSE for details)
 
 import os, sys, time, re, logging, subprocess, urllib, urllib2
 import json, xml.dom.minidom
-import socket, fcntl, struct, platform
+import socket, fcntl, struct, platform, inspect
 from decorators import memoize
 
 log = logging.getLogger()
@@ -200,13 +200,13 @@ def validate_resolution(config):
     return config
 
 
-def docs():
+def docs(app):
     """
     Gather all docstrings related to routes and return them grouped by module
     """
     routes = []
     modules = {}
-    for route in app().routes:
+    for route in app.routes:
         doc = inspect.getdoc(route.callback) or inspect.getcomments(route.callback)
         if not doc:
             doc = ''

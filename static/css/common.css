@@ -28,6 +28,11 @@
 }
 
 @font-face {
+  font-family: 'Roboto-Light';
+  src: url('../fonts/Roboto-Light.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'Roboto-Bold-Condensed';
   src: url('../fonts/Roboto-BoldCondensed.ttf') format('truetype');
 }
@@ -117,6 +122,23 @@ h1, h2, h3, h4, h5, h6 {
    image-rendering: -webkit-optimize-contrast;
 }
 
+/* debug info */
+
+li.module {
+  display: inline-table;
+  font-family: "Roboto-Bold-Condensed";
+}
+
+li.route tt {
+  font-size: 110%;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+ul.routes dt {
+  font-family: "Roboto-Light";
+  margin-bottom: 8px;
+}
 
 /* debug frames */
 

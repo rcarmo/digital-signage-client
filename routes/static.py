@@ -14,11 +14,6 @@ log = logging.getLogger()
 
 import app, utils
 
-@route('/')
-def index():
-    """Index page"""
-    return static_file('index.html', root=app.staticroot)
-
 @route('<filepath:path>')
 def static(filepath):
     """Handles all the remanining static files"""
