@@ -33,7 +33,7 @@ def textmessage():
     """Renders a text/HTML message"""
     app.template_vars.update({
         'title'  : 'ATTENTION',
-        'message': 'This is a generic waening message',
+        'message': 'This is a generic warning message',
     })
     app.template_vars.update(app.screen)
     return app.template_vars
