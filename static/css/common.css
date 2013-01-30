@@ -96,12 +96,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .branding {
     padding: 24px; 
-    font-family: "Roboto-Bold";
+    font-family: "Roboto-Light";
+    letter-spacing: -4px; 
     font-size: 120px;
 }
 
-#panel .number {
+.number {
     font-size: 120px;
+    font-family: "Roboto-Bold";
+    letter-spacing: -2px;
 }
 
 /* specifics */
