@@ -8,13 +8,8 @@
     });
 </script>
 <div class="container">
-<div id="title" class="branding">{{title}}</div>
-<div id="qrholder" class="fixed vcenter hcenter">
     <div id="qrcode" class="fixed vcenter"></div>
+    <p class="message light">{{message}}</p>
 </div>
-<div class="fixed vcenter" style="top: 165px; left: 600px; width: {{width-600}}px; height: {{height-164}}px;">
-    <p class="message">{{message}}</p>
-</div>
-</div>
-%rebase layout title="QR Code",  width=width, height=height, scripts=['jquery.min.js','jquery.qrcode.min.js'], debug=debug
+%rebase layout title=title,  width=width, height=height, scripts=['jquery.min.js','jquery.qrcode.min.js'], debug=debug
 

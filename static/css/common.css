@@ -100,6 +100,10 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 120px;
 }
 
+.light {
+    font-family: "Roboto-Light";  
+}
+
 .number {
     font-size: 120px;
     font-family: "Roboto-Bold";
@@ -116,11 +120,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* specifics */
 
-#qrholder {
-    width: 520px;
-    height: 520px;
-    background-color: #fff;
-    margin: auto;
+#qrcode canvas {
+  padding: 8px;
+  margin: 0px;
+  background-color: white;
 }
 
 
