@@ -139,7 +139,7 @@ h1, h2, h3, h4, h5, h6 {
 .tweet_list li {
   list-style-type: none;
   display: inline-block;
-  height: 160px;
+  height: 150px;
   vertical-align: middle;
 }
 
