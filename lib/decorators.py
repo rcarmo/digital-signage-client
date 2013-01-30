@@ -4,6 +4,7 @@
 Decorator functions
 
 Created by: Rui Carmo
+License: MIT (see LICENSE for details)
 """
 
 from bottle import request, response, route, abort
