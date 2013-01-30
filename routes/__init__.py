@@ -12,7 +12,7 @@ import os, sys, logging, inspect, json, cgi
 sys.path.append('../lib')
 log = logging.getLogger()
 
-from bottle import route, view, app as bottle_default_app
+from bottle import route, view, abort, app as bottle_default_app
 import app, utils
 
 # import all other routes
@@ -23,7 +23,7 @@ import static, feeds, content
 @route('/')
 @view('generic/index')
 def index():
-    """Renders the initial screen"""
+    """Startup screen"""
     app.template_vars.update({
         'title' : 'Startup Screen',
     })
@@ -33,7 +33,7 @@ def index():
 @route('/locate')
 @view('generic/locate')
 def locate():
-    """Renders a red template"""
+    """Found me! screen"""
     app.template_vars.update({
         'title' : 'Locate',
     })
@@ -43,7 +43,7 @@ def locate():
 @route('/nonet')
 @view('generic/nonet')
 def no_network():
-    """Renders a built-in warning"""
+    """No network screen"""
     app.template_vars.update({
         'title' : 'No Network Connection'
     })
@@ -52,7 +52,9 @@ def no_network():
 @route('/debug')
 @view('generic/debug')
 def dump_debug():
-    """Dumps active routes"""
+    """Debug screen (active routes)"""
+    if not app.config.debug:
+        abort(400, "Access Denied")
     app.template_vars.update({
         'title': 'Debug information',
         'modules': utils.docs(bottle_default_app())
