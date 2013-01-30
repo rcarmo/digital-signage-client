@@ -15,7 +15,7 @@
 %end
   </b
     </head>
-    <body style="width: {{width}}px; height: {{height}}px; overflow: hidden; display: -webkit-box; -webkit-box-pack: center; -webkit-box-align: center; background: url(img/gradient.jpg);">
+    <body style="width: {{width}}px; height: {{height}}px; overflow: hidden; display: -webkit-box; -webkit-box-pack: center; -webkit-box-align: center;">
 %include
 %if defined('debug'):
 %if debug:
