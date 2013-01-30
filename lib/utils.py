@@ -198,3 +198,27 @@ def validate_resolution(config):
             config.screen.width = 1024
             config.screen.height = 768
     return config
+
+
+def docs():
+    """
+    Gather all docstrings related to routes and return them grouped by module
+    """
+    routes = []
+    modules = {}
+    for route in app().routes:
+        doc = inspect.getdoc(route.callback) or inspect.getcomments(route.callback)
+        if not doc:
+            doc = ''
+        module = inspect.getmodule(route.callback).__name__
+        item = {
+            'method': route.method,
+            'route': route.rule,
+            'function': route.callback.__name__,
+            'module': module,
+            'doc': inspect.cleandoc(doc)
+        }
+        if not module in modules:
+            modules[module] = []
+        modules[module].append(item)
+    return modules
