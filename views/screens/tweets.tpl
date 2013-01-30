@@ -2,7 +2,7 @@
     $(document).ready(function($){
         $.ajaxSetup({async:false});
         $(".tweet").tweet({
-            query: "#codebits OR #codebits2012 OR from:codebits OR to:codebits",
+            query: "{{query}}",
             avatar_size: 140,
             count: 4,
             loading_text: "loading tweets...",

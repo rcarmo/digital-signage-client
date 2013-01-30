@@ -65,12 +65,12 @@ def random_hype():
 @bottle.view('screens/tweets')
 def tweets():
     """Renders the twitter stream"""
-    return {
-        'title': 'Tweets',
-        'width': config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
+    app.template_vars.update({
+        'title'  : 'Twitter feed',
+        'query'  : '#codebits OR #codebits2012 OR from:codebits OR to:codebits'
+    })
+    app.template_vars.update(app.screen)
+    return app.template_vars
 
 
 @bottle.route('/photos')
