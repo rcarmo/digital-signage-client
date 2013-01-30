@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>No Network Connection</title>
+        <title>{{title or 'Untitled'}}</title>
         <link rel="stylesheet" href="/css/common.css" type="text/css" media="screen" charset="utf-8">
         <!-- CSS3 neon blink -->
         <link rel="stylesheet" href="/css/neon.css" type="text/css" media="screen" charset="utf-8">

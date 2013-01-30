@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>{{title or 'No title'}}</title>
+        <title>{{title or 'Untitled'}}</title>
         <link rel="stylesheet" href="/css/common.css" type="text/css" media="screen" charset="utf-8">
         <style>
         body {

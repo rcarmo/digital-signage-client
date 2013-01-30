@@ -42,11 +42,18 @@ def locate():
 
 @route('/nonet')
 @view('generic/nonet')
-def locate():
+def no_network():
     """Renders a built-in warning"""
     app.template_vars.update({
-        'title' : 'No Network',
+        'title' : 'No Network Connection'
     })
     return app.template_vars
 
-
+@route('/debug')
+@view('generic/debug')
+def dump_debug():
+    """Dumps active routes"""
+    app.template_vars.update({
+        'title': 'Debug information'
+    })
+    return app.template_vars
