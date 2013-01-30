@@ -43,22 +43,22 @@ def textmessage():
 @bottle.view('screens/pixelart')
 def pixelart():
     """Renders the pixelart view"""
-    return {
-        'width': config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
+    app.template_vars.update({
+        'title'  : 'Pixelart'
+    })
+    app.template_vars.update(app.screen)
+    return app.template_vars
 
 
 @bottle.route('/hype/random')
 def random_hype():
     """Provides the random imagery for the pixelart view"""
     return bottle.redirect(
-        'http://localhost:8000/hype/img/' +
+        app.local_uri + '/img/hype/' +
         random.choice(
             filter( lambda x: x[0] != '.',
-                    os.listdir(os.path.join(config.staticroot, 'hype/img')))
-        ), 303)
+                    os.listdir(os.path.join(app.staticroot, 'img/hype')))
+        ), 302)
 
 
 @bottle.route('/tweets')
