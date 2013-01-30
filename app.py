@@ -28,6 +28,8 @@ version    = '0.13.01.30.1'
 running    = True
 # Screen state sent from server
 screen     = {}
+# Local URI Prefix
+local_uri  = 'http://%s:%s' % (config.http.bind_address, config.http.port)
 
 # Defaults sent to templates
 template_vars = {

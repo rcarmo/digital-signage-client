@@ -46,6 +46,8 @@ class Player(threading.Thread):
         # and avoids messy parameter passing via the URI
         log.debug('Showing screen %s' % app.screen)
         # now get the browser to ask for the item URI
+        if item['uri'][0] == '/':
+            item['uri'] = self.local_uri
         self.browser.do(config.command['uri'] % item['uri'])
         try:
             time.sleep(item['duration'])

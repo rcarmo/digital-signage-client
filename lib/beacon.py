@@ -44,7 +44,6 @@ class Beacon(threading.Thread):
         self.poll_interval  = poll_interval
         self.browser        = browser
         self.playlist       = 'Built-in'
-        self.local_uri      = 'http://%s:%s/' % (config.http.bind_address, config.http.port)
 
 
     def do_update(self, item):
@@ -101,7 +100,7 @@ class Beacon(threading.Thread):
 
     def do_text(self, item):
         log.debug('Preparing to display %s' % item)
-        item.update({'uri': self.local_uri + 'text'})
+        item.update({'uri': app.local_uri + '/text'})
         queue.put(item)
         
 
@@ -112,7 +111,7 @@ class Beacon(threading.Thread):
 
     def do_qrcode(self, item):
         log.debug('Preparing to display %s' % item)
-        item.update({'uri': self.local_uri + 'qrcode'})
+        item.update({'uri': app.local_uri + '/qrcode'})
         queue.put(item)
         
 
@@ -126,7 +125,7 @@ class Beacon(threading.Thread):
 
     def do_report_ip(self, item):
         """Handle the locate/report_ip action by queueing an URL view"""
-        queue.put({'uri': self.local_uri + 'locate', 'duration': item })
+        queue.put({'uri': app.local_uri + '/locate', 'duration': item })
 
 
     def run(self):
