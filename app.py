@@ -61,8 +61,8 @@ if __name__=='__main__':
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((config.http.bind_address,config.http.port))
-            log.error("Server already running, exiting.")
-            sys.exit(1)
+            print "Server already running, exiting."
+            sys.exit(2)
         except socket.error, msg:
             pass
         log.info("Socket free.")
