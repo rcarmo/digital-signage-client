@@ -111,6 +111,7 @@ def jsonp(callback):
         callback_function = request.query.get('callback')
         if callback_function:
             body = b''.join([callback_function, '(', body, ')'])
+            response.content_type = 'text/javascript'
 
         response.set_header('Last-Modified', time.strftime(gmt_format_string, time.gmtime()))
         response.set_header('ETag', binascii.b2a_base64(hashlib.sha1(body).digest()).strip())
