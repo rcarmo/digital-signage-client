@@ -11,4 +11,4 @@
     });
 </script>
 <div class="tweet" id="myDiv"></div>
-%rebase layout title=title, width=width, height=height, scripts=['jquery.min.js','jquery.tweet.js'], css=['jquery.tweet.css','tweetwall.css'], debug=debug
+%rebase layout title=title, width=width, height=height, scripts=['jquery.min.js','jquery.tweet.js'], debug=debug

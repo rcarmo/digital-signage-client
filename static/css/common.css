@@ -134,6 +134,45 @@ h1, h2, h3, h4, h5, h6 {
    image-rendering: -webkit-optimize-contrast;
 }
 
+/* tweetwall */
+
+.tweet_list li {
+  list-style-type: none;
+  display: inline-block;
+  height: 160px;
+  vertical-align: middle;
+}
+
+.tweet_avatar img {
+  width: 120px;
+  height: 120px;
+  border-radius: 120px;
+  box-shadow: 0px 0px 15px white;
+  /* tint transparent avatar backgrounds slightly */
+  background: rgba(0,0,0,0.5);
+  float: left;
+  margin-right: 16px;
+}
+
+.tweet_time, .tweet_time a  {
+  display: block;
+  color: white;
+  text-decoration: none;
+  width: 600px;
+}
+
+.tweet_text a {
+  font-family: "Roboto-Bold";
+  color: white;
+  text-decoration: none;
+}
+
+.tweet_text {
+  font-family: "Roboto-Light";
+  color: white;
+  font-size: 36px;
+}
+
 /* debug info */
 
 li.module {

@@ -67,7 +67,7 @@ def tweets():
     """Renders the twitter stream"""
     app.template_vars.update({
         'title'  : 'Twitter feed',
-        'query'  : '#codebits OR #codebits2012 OR from:codebits OR to:codebits'
+        'query'  : '#codebits OR from:meopt OR from:sapo OR from:PortugalTelecom OR from:cloudpt OR from:tmnpt'
     })
     app.template_vars.update(app.screen)
     return app.template_vars
