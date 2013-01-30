@@ -13,9 +13,8 @@
     <script src="/js/{{file}}"></script>
 %end
 %end
-  </b
     </head>
-    <body style="width: {{width}}px; height: {{height}}px; overflow: hidden; display: -webkit-box; -webkit-box-pack: center; -webkit-box-align: center;">
+    <body class="vcenter" style="width: {{width}}px; height: {{height}}px; overflow: hidden; {{extra_body_style if defined('extra_body_style') else ''}}">
 %include
 %if defined('debug'):
 %if debug:

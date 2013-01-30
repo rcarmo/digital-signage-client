@@ -78,7 +78,6 @@ h1, h2, h3, h4, h5, h6 {
     height: 140px;
     display: table;
     letter-spacing: -2px;
-    font-family: 'Gotham-Black';
     font-size: 110px;
     line-height: 140px;
     text-overflow: ellipsis;
@@ -107,14 +106,21 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: -2px;
 }
 
+.hcenter {
+  text-align: center;
+}
+
+.vcenter {
+  display: -webkit-box; -webkit-box-pack: center; -webkit-box-align: center;
+}
+
 /* specifics */
 
 #qrholder {
-    top: 165px;
-    left: 40px;
-    width: 560px;
-    height: 560px;
+    width: 520px;
+    height: 520px;
     background-color: #fff;
+    margin: auto;
 }
 
 
