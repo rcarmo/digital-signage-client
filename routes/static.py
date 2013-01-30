@@ -8,19 +8,19 @@ License: MIT (see LICENSE for details)
 """
 
 import os, sys, logging
-from bottle import app, route, static_file, view
+from bottle import qroute, static_file, view
 
 log = logging.getLogger()
 
-import utils
+import app, utils
 
 @route('/')
 def index():
     """Index page"""
-    return static_file('index.html', root=app.config.staticroot)
+    return static_file('index.html', root=app.staticroot)
 
 @route('<filepath:path>')
 def static(filepath):
     """Handles all the remanining static files"""
-    return static_file(filepath, root=app.config.staticroot)
+    return static_file(filepath, root=app.staticroot)
 
