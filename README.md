@@ -124,7 +124,8 @@ A few photos of this in action: [1](http://fotos.sapo.pt/ndantas/fotos/?uid=HrC4
 [SAPO](http://www.sapo.pt) has a [strong Open-Source culture](http://oss.sapo.pt) and believes in placing credit where credit is due.
 
 * This entire codebase is [MIT licensed](LICENSE), and therefore free to use as you please for commercial or non-commercial purposes.
-* Sample GIF images are [CC Licensed](http://creativecommons.org/licenses/by-sa/3.0/) from [Wikimedia Commons](http://commons.wikimedia.org)
+* Sample GIF images are [CC Licensed](http://creativecommons.org/licenses/by-sa/3.0/) from [Wikimedia Commons](http://commons.wikimedia.org).
+* The [Roboto Font](http://developer.android.com/design/style/typography.html) is bundled as a convenience (and because it's eminently suited to digital signage) under the [Apache License](http://www.apache.org/licenses/LICENSE-2.0.html).
 * The [SAPO](http://www.sapo.pt) logo is a registered trademark of [Portugal Telecom](http://www.telecom.pt). It is included as a default part of this software's branding screen and cannot be reused for any other purpose.
 
 As common courtesy, we ask you to preserve (and contribute to) source code comments, attributions and this `README` if you decide to fork, deploy or otherwise redistribute this software.
