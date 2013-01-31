@@ -67,23 +67,10 @@ def tweets():
     """Renders the twitter stream"""
     app.template_vars.update({
         'title'  : 'Twitter feed',
-        'query'  : '#codebits OR from:meopt OR from:sapo OR from:PortugalTelecom OR from:cloudpt OR from:tmnpt'
+        'query'  : '#codebits OR from:meopt OR from:sapo OR from:radarsapo OR from:PortugalTelecom OR from:cloudpt OR from:tmnpt'
     })
     app.template_vars.update(app.screen)
     return app.template_vars
-
-
-@bottle.route('/photos')
-@bottle.view('screens/photos')
-def photos():
-    """Renders a photo montage"""
-    return {
-        'feed': 'photos',
-        'title': 'Photos',
-        'width': config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
 
 
 @bottle.route('/news/<name>')
@@ -94,13 +81,12 @@ def newsfrom(name):
         title = {'codebits': 'Codebits', 'sapo': 'Notícias'}[name]
     except:
         title = "News"
-    return {
-        'feed': name,
-        'title': title,
-        'width': config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
+    app.template_vars.update({
+        'title'  : title,
+        'feed'   : name
+    })
+    app.template_vars.update(app.screen)
+    return app.template_vars
     
 
 @bottle.route('/brand')
