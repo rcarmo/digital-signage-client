@@ -14,6 +14,7 @@ from decorators import memoize
 
 log = logging.getLogger()
 
+
 class Struct(dict):
     """An object that recursively builds itself from a dict and allows easy access to attributes"""
 
@@ -31,6 +32,7 @@ class Struct(dict):
         except KeyError:
             raise AttributeError(attr)
 
+
 class InMemoryHandler(logging.Handler):
     """In memory logging handler with a circular buffer"""
 
@@ -42,10 +44,9 @@ class InMemoryHandler(logging.Handler):
             self.flush()
 
     def emit(self, record):
-            # record.message is the log message
-            self.records.append(self.format(record))
+            self.records.append(self.format(record)))
             if len(self.records) > self.limit:
-                self.records.pop()
+                self.records.pop(0)
 
     def flush(self):
         self.records = []
