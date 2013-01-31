@@ -20,7 +20,7 @@ import app, utils, proxy
 def route_feeds(name):
     """Feed proxy handler"""
     if name in config.feeds.keys():
-        return proxy.fetch(app.config.feeds[name], response)
+        return proxy.fetch(app.config.content.feeds[name], response)
     return HTTPError(404,"File not found")
 
 
@@ -28,5 +28,5 @@ def route_feeds(name):
 def route_item(name, id):
     """Feed proxy handler"""
     if name in config.feeds.keys():
-        return proxy.fetch(app.config.feeds[name] + '/%s' % id, response)
+        return proxy.fetch(app.config.content.feeds[name] + '/%s' % id, response)
     return HTTPError(404,"File not found")
