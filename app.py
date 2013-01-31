@@ -54,7 +54,6 @@ if __name__=='__main__':
     if not config.debug or ('BOTTLE_CHILD' in os.environ):
         log.info("Setting up application.")
         import routes, playlist, browser, beacon, video
-        log.info("Serving requests.")
 
         # Check if another instance is still running
         try:
@@ -89,6 +88,7 @@ if __name__=='__main__':
             uzbl.do(config.command['local'] % 'nonet')
             log.error("Failsafe mode")
 
+    log.info("Serving requests.")
     bottle.run(
         port     = config.http.port, 
         host     = config.http.bind_address, 
