@@ -15,10 +15,9 @@ log = logging.getLogger()
 from bottle import route, view, abort, app as bottle_default_app
 import app, utils
 
-# import all other routes
+# import all other routes - order is significant, keep static at the end
 
-
-import static, feeds, content
+import feeds, content, static
 
 @route('/')
 @view('generic/index')

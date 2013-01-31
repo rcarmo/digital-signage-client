@@ -1,13 +1,28 @@
+#news {
+    z-index: 100;
+    position: absolute;
+    width: 1260px;
+    left: 10px;
+    right: 10px;
+    top: 20px;
+    height: 540px;
+    overflow: hidden;
+    display: table;
+}
+
 .updated { font-size: 80%; }
 .description { margin-top: 1em; margin-bottom: 1em; }
 .item { border-bottom: 1px solid black; }
+
+/* Note that this removes stuff like inline images, etc. that we _don't_ want displayed inline */
 .description * {
     display: none;
 }
+
+/* We nou add back most of what we want visible */
 .description p, .description p * {
     display: inline;
 }
-
 .description a, .description p a {
     display: inline;
     color: #ccc;
@@ -18,7 +33,7 @@ li.news {
     padding: 0px;
     list-style-type: none;
     width: 560px;
-    height: 280px;
+    height: 340px;
     float: left;
     margin-right: 50px;
 }
@@ -32,24 +47,14 @@ li.news {
     font-size: 32px;
     font-weight: bold;
     padding-bottom: 6px;
-    border-bottom: 2px solid #888;
+    border-bottom: 1px solid #ccc;
     -webkit-line-clamp: 2;
 }
 .description {
+    font-family: "Roboto-Light";
     color: #ccc;
     text-overflow: hidden;
     font-size: 26px;
     margin: 6px 0px 0px 0px;
-    -webkit-line-clamp: 5;
-}
-#news {
-    z-index: 100;
-    position: absolute;
-    width: 1260px;
-    left: 10px;
-    right: 10px;
-    top: 170px;
-    height: 540px;
-    overflow: hidden;
-    display: table;
+    -webkit-line-clamp: 7;
 }

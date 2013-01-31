@@ -67,7 +67,7 @@ def tweets():
     """Renders the twitter stream"""
     app.template_vars.update({
         'title'  : 'Twitter feed',
-        'query'  : '#codebits OR from:meopt OR from:sapo OR from:radarsapo OR from:PortugalTelecom OR from:cloudpt OR from:tmnpt'
+        'query'  : app.config.content.twitter
     })
     app.template_vars.update(app.screen)
     return app.template_vars
@@ -90,14 +90,13 @@ def newsfrom(name):
     
 
 @bottle.route('/brand')
-@bottle.view('brand')
+@bottle.view('screens/brand')
 def brand():
-    return {
-        'title': 'Codebits',
-        'width':  config.width,
-        'height': config.height,
-        'debug': config.debug
-    }
+    app.template_vars.update({
+        'title'  : 'Branding',
+    })
+    app.template_vars.update(app.screen)
+    return app.template_vars
 
 
 @bottle.route('/shorten/<name:path>')

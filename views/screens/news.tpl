@@ -8,6 +8,7 @@
                 selected = new Array();
                 for(var i = 0; i < feed.items.length && i < 8; i++) {
                     var item = feed.items[i];
+                    /* try to de-duplicate feeds - some aggregates will throw up re-posts of the same content */
                     if($.inArray(item.title, known) != -1) { continue; }
                     known.push(item.title);
                     selected.push(item);
@@ -28,8 +29,6 @@
         })
     });
 </script>
-%include svg/simple width=width, height=height, img='rss.png'
-<div id="title" class="fixed">{{title}}</div>
 <div id="news">
     <div id="result"></div>
 </div>
