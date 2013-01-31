@@ -44,7 +44,7 @@ class InMemoryHandler(logging.Handler):
             self.flush()
 
     def emit(self, record):
-            self.records.append(self.format(record)))
+            self.records.append(self.format(record))
             if len(self.records) > self.limit:
                 self.records.pop(0)
 
