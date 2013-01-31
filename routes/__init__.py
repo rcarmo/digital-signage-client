@@ -12,7 +12,7 @@ import os, sys, logging, inspect, json, cgi
 sys.path.append('../lib')
 log = logging.getLogger()
 
-from bottle import route, view, abort, app as bottle_default_app
+from bottle import response, route, view, abort, app as bottle_default_app
 import app, utils
 
 # import all other routes - order is significant, keep static at the end
@@ -48,6 +48,7 @@ def no_network():
     })
     return app.template_vars
 
+
 @route('/debug')
 @view('generic/debug')
 def dump_debug():
@@ -59,3 +60,15 @@ def dump_debug():
         'modules': utils.docs(bottle_default_app())
     })
     return app.template_vars
+
+
+@route('/logs')
+def dump_logs():
+    """Dump log entries from in-memory logger"""
+
+    if not app.config.debug:
+        abort(400, "Access Denied")
+    response.content_type = 'text/plain'
+
+    # this assumes the RAM logger is the initial one, as per the default config
+    return '\n'.join(log.handlers[0].dump())
