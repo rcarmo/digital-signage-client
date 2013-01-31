@@ -89,9 +89,10 @@ def newsfrom(name):
     return app.template_vars
     
 
-@bottle.route('/brand')
+@bottle.route('/about')
 @bottle.view('screens/brand')
 def brand():
+    """Shows an about page"""
     app.template_vars.update({
         'title'  : 'Branding',
     })
@@ -101,7 +102,7 @@ def brand():
 
 @bottle.route('/shorten/<name:path>')
 def shorten(name):
-    log.info(name)
+    """URL shortener handler"""
     return utils.shorten(name)
 
 
