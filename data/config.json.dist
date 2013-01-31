@@ -15,11 +15,14 @@
         "width": 1280,
         "height": 720
     },
-    "feeds": {
-        "__comment": "service feed examples",
-        "photos"  : "http://services.sapo.pt/Photos/RSS/pesquisa/?termos=codebits2012&o=maisrecentes&limit=40",
-        "codebits": "https://codebits.eu/rss",
-        "sapo"    : "http://noticias.sapo.pt/rss/news/"
+    "content": {
+        "feeds": {
+            "__comment": "service feed examples",
+            "photos"  : "http://services.sapo.pt/Photos/RSS/pesquisa/?termos=codebits2012&o=maisrecentes&limit=40",
+            "codebits": "https://codebits.eu/rss",
+            "sapo"    : "http://noticias.sapo.pt/rss/news/"
+        },
+        "twitter": "#codebits OR from:meopt OR from:sapo OR from:radarsapo OR from:PortugalTelecom OR from:cloudpt OR from:tmnpt"
     },
     "uzbl": {
         "__comment": "command patterns to make it easier to control uzbl-core",
