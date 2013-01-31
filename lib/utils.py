@@ -43,7 +43,7 @@ class InMemoryHandler(logging.Handler):
 
     def emit(self, record):
             # record.message is the log message
-            self.records.append(record.message)
+            self.records.append(self.format(record))
             if len(self.records) > self.limit:
                 self.records.pop()
 
@@ -51,7 +51,7 @@ class InMemoryHandler(logging.Handler):
         self.records = []
 
     def dump(self):
-        return records
+        return self.records
 
 
 @memoize
