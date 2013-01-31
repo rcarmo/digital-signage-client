@@ -33,11 +33,15 @@
             "soft_limit": 98304   
         }
     },
-    "logging": {
+     "logging": {
         "version": 1,
         "formatters": {
             "http": {
                 "format" : "localhost - - [%(asctime)s] %(process)d %(levelname)s %(message)s",
+                "datefmt": "%Y/%m/%d %H:%M:%S"
+            },
+            "plain": {
+                "format" : "%(asctime)s %(process)d %(levelname)s %(message)s",
                 "datefmt": "%Y/%m/%d %H:%M:%S"
             }
         },
@@ -50,8 +54,8 @@
             },
             "ram": {
                 "class"    : "utils.InMemoryHandler",
-                "formatter": "http",
-                "level"    : "WARNING",
+                "formatter": "plain",
+                "level"    : "DEBUG",
                 "limit"    : 200
             }
         },
