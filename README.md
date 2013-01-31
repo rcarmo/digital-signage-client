@@ -113,6 +113,14 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
 
 * reboot
 
+
+## ON LOGGING
+
+Note that the app has built-in support for diagnostics logging (which is kept in RAM and can be sent back to the server if so desired). This is set up as the `ram` logger in `config.json.dist`.
+
+This can be very helpful in debugging the system remotely, but will not capture tracebacks _as is_ (pull requests towards contributing that functionality are welcome).
+
+
 ## FURTHER READING
 
 [The original blog post][b1], wherein you'll find some screenshots of the server.

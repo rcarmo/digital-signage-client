@@ -128,13 +128,18 @@ class Beacon(threading.Thread):
         queue.put({'uri': app.local_uri + '/locate', 'duration': item })
 
 
+    def do_send_logs(self, item):
+        """Handle the logs action by toggling an instance variable"""
+        self.send_logs = True
+
+
     def run(self):
         """Thread main loop"""
         while(app.running):
             try:
                 time.sleep(self.poll_interval)
                 log.debug("Calling home...")
-                reply = call_home({
+                data = {
                     'playlist'    : self.playlist,
                     'mac_address' : self.mac_address,
                     'ip_address'  : self.ip_address,
@@ -143,7 +148,11 @@ class Beacon(threading.Thread):
                     'cpu_usage'   : utils.get_cpu_usage(),
                     'browser_ram' : utils.get_pid_rss(self.browser.uzbl.pid),
                     'uptime'      : utils.get_uptime()
-                }, self.config.server_url)
+                }
+                if self.send_logs:
+                    data['logs'] = '\n'.join(utils.get_log_entries())
+                    self.send_logs = False
+                reply = call_home(data, self.config.server_url)
                 log.debug("Got reply %s" % reply)
                 self.do_clock(reply)
                 try:

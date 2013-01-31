@@ -69,6 +69,4 @@ def dump_logs():
     if not app.config.debug:
         abort(400, "Access Denied")
     response.content_type = 'text/plain'
-
-    # this assumes the RAM logger is the initial one, as per the default config
-    return '\n'.join(log.handlers[0].dump())
+    return '\n'.join(utils.get_log_entries())

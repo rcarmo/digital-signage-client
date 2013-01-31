@@ -44,7 +44,6 @@ template_vars = {
 logging.config.dictConfig(dict(config.logging))
 log = logging.getLogger()
 
-
 if __name__=='__main__':
     if config.debug:
         if 'BOTTLE_CHILD' not in os.environ:

@@ -201,6 +201,14 @@ def validate_resolution(config):
     return config
 
 
+def get_log_entries():
+    """Locates the RAM log handler (if any) and returns the last log entries"""
+    for handler in log.handlers:
+        if type(handler) is InMemoryHandler:
+            return handler.dump()
+    return None
+
+
 def docs(app):
     """
     Gather all docstrings related to routes and return them grouped by module
