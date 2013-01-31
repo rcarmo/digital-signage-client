@@ -10,6 +10,7 @@ License: MIT (see LICENSE for details)
 import os, sys, time, re, logging, subprocess, urllib, urllib2
 import json, xml.dom.minidom
 import socket, fcntl, struct, platform, inspect
+from collections import deque
 from decorators import memoize
 
 log = logging.getLogger()
@@ -39,17 +40,15 @@ class InMemoryHandler(logging.Handler):
     def __init__(self, limit=8192):
             # run the regular Handler __init__
             logging.Handler.__init__(self)
-            # Our custom arguments
+            # Our custom argument
             self.limit = limit
             self.flush()
 
     def emit(self, record):
             self.records.append(self.format(record))
-            if len(self.records) > self.limit:
-                self.records.pop(0)
 
     def flush(self):
-        self.records = []
+        self.records = deque([],self.limit)
 
     def dump(self):
         return self.records
