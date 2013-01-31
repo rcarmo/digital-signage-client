@@ -1,11 +1,27 @@
 SAPO DIGITAL SIGNAGE CLIENT
 ===========================
 
+## UPDATE:
+
+The client is now working in staging/debug mode, so anyone who checks out the code can get it running out of the box on their local machine.
+
+Work is ongoing to finish refactoring the playlist/browser control engine (it's nearly done).
+
 ## IMPORTANT NOTE
 
-> This repository currently contains sources for _the client only_, which is _broken_ - as in, it's currently being refactored but not quite in a usable state. The server code will follow in a separate repository.
+> This repository currently contains sources for _the client only_, which is currently being refactored but not quite in a usable state. The server code will follow in a separate repository.
 
 This is being released as-is mostly to enable people to learn from it and use the client in standalone mode.
+
+## SETTING UP FOR TESTING AND DEVELOPMENT
+
+* Clone the repo (no surprises here)
+* Copy `data/config.json.dist` to `data/config.json`, making any required changes
+* Run it:
+
+    python app.py
+
+* Go to [http://localhost:8000](http://localhost:8000) - or, if you've enabled debugging, [http://localhost:8000/debug](http://localhost:8000/debug) to see a list of all active local URLs
 
 ## STUFF YOU SHOULD BE AWARE OF
 
@@ -56,15 +72,17 @@ Here's a brief summary of the requirements and their impact on solution design:
 
 ## INSTALLATION
 
-The following steps assume you're deploying on the [Raspberry Pi][rpi]:
+The following steps assume you're deploying on the [Raspberry Pi][rpi] as the `pi` user.
 
+* Checkout the repository
+* Clone the repo (no surprises here)
+* Copy `data/config.json.dist` to `data/config.json`, making any required changes
 * install the following packages:
 
     	sudo apt-get install uzbl unclutter ttf-mscorefonts-installer vim tmux \
         x11-xserver-utils git-core ntpdate ack-grep denyhosts omxplayer watchdog
 
 * edit `/boot/config.txt` to set the framebuffer to 1280x720
-
 * edit `/etc/rc.local` to include these lines before the final command:
 
         fbset --xres 1280 --yres 720
@@ -100,6 +118,16 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
 [The original blog post][b1], wherein you'll find some screenshots of the server.
 
 A few photos of this in action: [1](http://fotos.sapo.pt/ndantas/fotos/?uid=HrC41nF3vZfkMA16utoZ), [2](http://fotos.sapo.pt/ndantas/fotos/?uid=9zWgzUQMIwp9NkfMSq1i), [3](http://fotos.sapo.pt/ndantas/fotos/?uid=7ZZZgiyiUhmarZbCzM6p), [4](http://fotos.sapo.pt/ndantas/fotos/?uid=QB91ymIZmvByPuKQ1rwj), [5](http://fotos.sapo.pt/ndantas/fotos/?uid=9zWgzUQMIwp9NkfMSq1i), [6](http://fotos.sapo.pt/rcarmo/fotos/?uid=iznSQ4TuNFKtcpNBdQWS).
+
+## LICENSING
+
+[SAPO](http://www.sapo.pt) has a [strong Open-Source culture](http://oss.sapo.pt) and believes in placing credit where credit is due.
+
+* This entire codebase is [MIT licensed](LICENSE), and therefore free to use as you please for commercial or non-commercial purposes.
+* Sample GIF images are [CC Licensed](http://creativecommons.org/licenses/by-sa/3.0/) from [Wikimedia Commons](http://commons.wikimedia.org)
+* The [SAPO](http://www.sapo.pt) logo is a registered trademark of [Portugal Telecom](http://www.telecom.pt). It is included as a default part of this software's branding screen and cannot be reused for any other purpose.
+
+As common courtesy, we ask you to preserve (and contribute to) source code comments, attributions and this `README` if you decide to fork, deploy or otherwise redistribute this software.
 
 [cb]: https://codebits.eu
 [rpi]: http://www.raspberrypi.org
