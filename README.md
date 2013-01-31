@@ -19,7 +19,7 @@ This is being released as-is mostly to enable people to learn from it and use th
 * Copy `data/config.json.dist` to `data/config.json`, making any required changes
 * Run it:
 
-    python app.py
+      python app.py
 
 * Go to [http://localhost:8000](http://localhost:8000) - or, if you've enabled debugging, [http://localhost:8000/debug](http://localhost:8000/debug) to see a list of all active local URLs
 
