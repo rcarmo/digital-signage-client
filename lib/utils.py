@@ -213,9 +213,7 @@ def get_log_entries():
 
 
 def docs(app):
-    """
-    Gather all docstrings related to routes and return them grouped by module
-    """
+    """Gather all docstrings related to routes and return them grouped by module"""
     modules = {}
     for route in app.routes:
         doc = inspect.getdoc(route.callback) or inspect.getcomments(route.callback)
