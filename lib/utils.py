@@ -33,16 +33,19 @@ class Struct(dict):
         except KeyError:
             raise AttributeError(attr)
 
+    def __setattr__(self, attr, value):
+        self.__setitem__(attr, value)
+
 
 class InMemoryHandler(logging.Handler):
     """In memory logging handler with a circular buffer"""
 
     def __init__(self, limit=8192):
-            # run the regular Handler __init__
-            logging.Handler.__init__(self)
-            # Our custom argument
-            self.limit = limit
-            self.flush()
+        # run the regular Handler __init__
+        logging.Handler.__init__(self)
+        # Our custom argument
+        self.limit = limit
+        self.flush()
 
     def emit(self, record):
             self.records.append(self.format(record))
