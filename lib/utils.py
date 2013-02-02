@@ -48,7 +48,7 @@ class InMemoryHandler(logging.Handler):
         self.flush()
 
     def emit(self, record):
-            self.records.append(self.format(record))
+        self.records.append(self.format(record))
 
     def flush(self):
         self.records = deque([],self.limit)
