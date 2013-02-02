@@ -51,7 +51,7 @@ class InMemoryHandler(logging.Handler):
         self.records.append(self.format(record))
 
     def flush(self):
-        self.records = deque([],self.limit)
+        self.records = deque([], self.limit)
 
     def dump(self):
         return self.records
@@ -85,7 +85,7 @@ def valid_ip_address(addr):
 def get_pid_stats(pid):
     """Retrieve process kernel counters"""
     stats = open('/proc/%d/status' % pid,'r').readlines()
-    return dict(filter(lambda x: len(x)==2,map(lambda x: x.split()[:2],stats)))
+    return dict(filter(lambda x: len(x)==2, map(lambda x: x.split()[:2], stats)))
 
 
 def get_pid_rss(pid):
@@ -99,14 +99,15 @@ def get_pid_rss(pid):
 def get_net_bytes(dev='eth0'):
     """Read network interface traffic counters"""
     return {
-        'rx': float(open('/sys/class/net/%s/statistics/rx_bytes' % dev,'r').read().strip()),
-        'tx': float(open('/sys/class/net/%s/statistics/tx_bytes' % dev,'r').read().strip())
+        'rx': float(open('/sys/class/net/%s/statistics/rx_bytes' % dev, 'r').read().strip()),
+        'tx': float(open('/sys/class/net/%s/statistics/tx_bytes' % dev, 'r').read().strip())
     }
 
 
 def get_cpu_stat():
+    """Retrieves CPU stats"""
     cpu = open('/proc/stat','r').readlines()[0]
-    return map(float,cpu.split()[1:5])
+    return map(float, cpu.split()[1:5])
 
 
 def get_cpu_usage(interval=0.1):
@@ -124,14 +125,14 @@ def get_cpu_usage(interval=0.1):
 def get_cpu_freq(cpu='cpu0'):
     """Retrieves the current CPU speed in MHz - for a single CPU"""
     if 'Linux' in platform.system():
-        return float(open('/sys/devices/system/cpu/%s/cpufreq/scaling_cur_freq' % cpu,'r').read().strip())/1000.0
+        return float(open('/sys/devices/system/cpu/%s/cpufreq/scaling_cur_freq' % cpu, 'r').read().strip())/1000.0
     return 0
 
 
 def get_cpu_temp(cpu='cpu0'):
     """Retrieves the current CPU core temperature in degrees Celsius - specific to the Raspberry Pi"""
     if 'Linux' in platform.system():
-        return float(open('/sys/class/thermal/thermal_zone%s/temp' % cpu[-1],'r').read().strip())/1000.0
+        return float(open('/sys/class/thermal/thermal_zone%s/temp' % cpu[-1], 'r').read().strip())/1000.0
     return 0
 
 
@@ -157,7 +158,7 @@ def get_mac_address(dev="eth0"):
         return filter(lambda x: 'ether' in x.strip(), ifconfig.stdout.readlines())[0].split()[1]
 
     # else assume we're doing in Linux and get it from /sys
-    return open('/sys/class/net/%s/address' % dev,'r').read().strip()
+    return open('/sys/class/net/%s/address' % dev, 'r').read().strip()
 
 
 @memoize
@@ -172,7 +173,7 @@ def get_ip_address(dev="eth0"):
     # else assume we're doing it in Linux and do it via SIOCGIFADDR
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        return socket.inet_ntoa(fcntl.ioctl(s.fileno(),0x8915,struct.pack('256s', dev[:15]))[20:24])
+        return socket.inet_ntoa(fcntl.ioctl(s.fileno(), 0x8915, struct.pack('256s', dev[:15]))[20:24])
     except:
         return None
 
@@ -189,7 +190,7 @@ def get_config(filename):
 
 def path_for(name):
     """Build relative paths to current script"""
-    return os.path.join(os.path.dirname(sys.argv[0]),name)
+    return os.path.join(os.path.dirname(sys.argv[0]), name)
 
 
 def validate_resolution(config):
@@ -215,7 +216,6 @@ def docs(app):
     """
     Gather all docstrings related to routes and return them grouped by module
     """
-    routes = []
     modules = {}
     for route in app.routes:
         doc = inspect.getdoc(route.callback) or inspect.getcomments(route.callback)
