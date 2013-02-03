@@ -109,7 +109,7 @@ class Player(threading.Thread):
         log.info('Waiting %ds...' % self.start_interval)
         time.sleep(self.start_interval)
         log.info('Starting playlist')
-        while(config.running):
+        while(app.running):
             log.debug("Current playlist: %s" % self.playlist)
             for item in self.playlist['screens']:
                 # reset shared data
@@ -124,6 +124,6 @@ class Player(threading.Thread):
                 except Empty:
                     pass
                 log.debug("Current item: %s" % item)
-                if config.running: # state may have changed
+                if app.running: # state may have changed
                     self.handle_item(item)
         log.info("Exiting player thread.")
