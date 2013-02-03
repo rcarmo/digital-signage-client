@@ -10,7 +10,7 @@ License: MIT (see LICENSE for details)
 import os, sys, re, stat, glob, time, json, logging, logging.config, threading, random
 import socket, urllib, urllib2, urlparse, commands, functools, subprocess
 
-sys.path.append('lib')
+sys.path.insert(0,'lib') # prefer bundled libraries to local installs
 
 import bottle, utils
 
