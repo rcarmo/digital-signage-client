@@ -70,7 +70,7 @@ if __name__=='__main__':
             if not config.staging:
                 # Get the browser going
                 uzbl = browser.Browser(config)
-                p = playlist.Player(uzbl, 'playlist.json')
+                p = playlist.Player(config, uzbl, 'playlist.json')
                 log.info("Starting player thread")
                 p.start()
 
