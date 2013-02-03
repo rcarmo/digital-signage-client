@@ -5,7 +5,7 @@
             { "uri": "/about",        "duration": 15 },
             { "uri": "/tweets",       "duration": 25 },
             { "uri": "/news/codebits","duration": 25 },
-            { "random": "meme" }
+            { "random": "meme" },
             { "uri": "/news/sapo",    "duration": 25 },
             { "uri": "/photos",       "duration": 25 },
             { "random": "video" },
