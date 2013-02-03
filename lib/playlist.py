@@ -23,7 +23,7 @@ class Player(threading.Thread):
         self.start_interval = start_interval
         self.browser        = browser
         self.playlist       = self.read_playlist(playlist_name)
-
+        self.local_uri      = 'http://%s:%s' % (config.http.bind_address, config.http.port)
 
     def read_playlist(self, name):
         """Retrieve playlist data from a JSON file"""
@@ -45,10 +45,11 @@ class Player(threading.Thread):
         # makes it trivial to pass context to the HTML templates
         # and avoids messy parameter passing via the URI
         log.debug('Showing screen %s' % app.screen)
-        # now get the browser to ask for the item URI
+
+        # if playlist has schemaless URIs, assume they're local
         if item['uri'][0] == '/':
-            item['uri'] = self.local_uri
-        self.browser.do(config.command['uri'] % item['uri'])
+            item['uri'] = self.local_uri + item['uri']
+        self.browser.do(self.config.uzbl.uri % item['uri'])
         try:
             time.sleep(item['duration'])
         except:
