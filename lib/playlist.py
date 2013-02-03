@@ -15,7 +15,7 @@ log = logging.getLogger()
 
 class Player(threading.Thread):
 
-    def __init__(self, config, browser, playlist_name = 'default.json', start_interval=10):
+    def __init__(self, config, browser, playlist_name='default.json', start_interval=10):
         """Initialization"""
         
         threading.Thread.__init__(self)
@@ -31,7 +31,7 @@ class Player(threading.Thread):
             playlist = json.loads(open(os.path.join(utils.path_for('data'), 
                 '%s' % name),'r').read())['playlist']
         except Exception, e:
-            log.error('Error %s loading playlist "%s", using default' % (e,name))
+            log.error('Error %s loading playlist "%s", attempting to fallback to default' % (e,name))
             playlist = json.loads(open(os.path.join(utils.path_for('data'),
                 'default.json'),'r').read())['playlist']
         return playlist
