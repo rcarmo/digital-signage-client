@@ -44,6 +44,7 @@ class Beacon(threading.Thread):
         self.poll_interval  = poll_interval
         self.browser        = browser
         self.playlist       = 'Built-in'
+        self.send_logs      = False
 
 
     def do_update(self, item):
