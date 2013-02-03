@@ -1,15 +1,17 @@
 SAPO DIGITAL SIGNAGE CLIENT
 ===========================
 
-## UPDATE:
+## UPDATE (FEB 3 2013):
 
-The client is now working in staging/debug mode, so anyone who checks out the code can get it running out of the box on their local machine.
+The client is now almost fully working in standalone mode (except for video playback, which needs a bit further testing).
 
-Work is ongoing to finish refactoring the playlist/browser control engine (it's nearly done).
+Anyone who checks out the code can get it running out of the box on their local machine.
+
+Work is ongoing to finish refactoring and publishing the server side (it needs a little more cleanup than the client).
 
 ## IMPORTANT NOTE
 
-> This repository currently contains sources for _the client only_, which is currently being refactored but not quite in a usable state. The server code will follow in a separate repository.
+> This repository currently contains sources for _the client only_.  The server code will follow in a separate repository.
 
 This is being released as-is mostly to enable people to learn from it and use the client in standalone mode.
 
