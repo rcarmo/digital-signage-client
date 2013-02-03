@@ -7,7 +7,6 @@
             { "uri": "/news/codebits","duration": 25 },
             { "random": "meme" },
             { "uri": "/news/sapo",    "duration": 25 },
-            { "uri": "/photos",       "duration": 25 },
             { "random": "video" }
         ],
         "random": {
