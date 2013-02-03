@@ -79,8 +79,8 @@ if __name__=='__main__':
                     b = beacon.Beacon(config, utils.get_mac_address(config.interface), ip_address, uzbl)
                     log.info("Starting beacon thread")
                     b.start()
-                except Exception, e:
-                    log.info("%s, operating in standalone mode." % e)
+                except AssertionError:
+                    log.info("No server configured, operating in standalone mode.")
                     pass
         else:
             # Signal for help and stay put. There's no point in debugging the LAN ourselves.
