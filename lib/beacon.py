@@ -19,12 +19,12 @@ log = logging.getLogger()
 
 queue = Queue()
 
-def call_home(data, server_url):
+def call_home(data, config):
     """Talk to the server and get back any queued actions."""
 
     conn = urllib2.build_opener(proxy.SmartRedirectHandler())
     data = urllib.urlencode(data)
-    req = urllib2.Request(server_url, data, {'Version': config.version} )
+    req = urllib2.Request(config.server_url, data, {'Version': app.version} )
     resp = conn.open(req, timeout=15)
     try:
         actions = json.loads(resp.read().strip())
@@ -43,23 +43,23 @@ class Beacon(threading.Thread):
         self.ip_address     = ip_address
         self.poll_interval  = poll_interval
         self.browser        = browser
-        self.playlist       = 'Built-in'
+        self.playlist       = 'Default'
+        self.local_uri      = 'http://%s:%s' % (config.http.bind_address, config.http.port)
         self.send_logs      = False
-
 
     def do_update(self, item):
         """Perform a client update by dint of downloading a tarball and expanding it"""
 
         if 'bundle' in item:
-            self.browser.do(config.command['local'] % 'updating.html')
+            self.browser.do(self.config.uzbl.uri % (self.local_uri + 'updating.html'))
             # Signal other threads to quit cleanly
-            config.running = False
+            app.running = False
 
             # Rather simple-minded approach to update via a tar file
             # Improvements to this are welcome, but this is field-tested :)
             log.debug('Preparing to update %s' % item)
             conn = urllib2.build_opener(proxy.SmartRedirectHandler())                        
-            req = urllib2.Request('%s/updates/%s' % (config.server, item['bundle']))
+            req = urllib2.Request('%s/updates/%s' % (self.config.server, item['bundle']))
             try:
                 resp = conn.open(req, timeout=30)   
                 # Yes, we assume the update will always fit into RAM 
@@ -82,7 +82,7 @@ class Beacon(threading.Thread):
     def do_playlist(self, item):
         log.debug('Preparing to update %s' % item)
         conn = urllib2.build_opener(proxy.SmartRedirectHandler())                        
-        req = urllib2.Request('%s/playlists/%s' % (config.server + item['playlist']))
+        req = urllib2.Request('%s/playlists/%s' % (self.config.server + item['playlist']))
         try:
             resp = conn.open(req, timeout=30)
             # try to parse the playlist
@@ -153,14 +153,14 @@ class Beacon(threading.Thread):
                 if self.send_logs:
                     data['logs'] = '\n'.join(utils.get_log_entries())
                     self.send_logs = False
-                reply = call_home(data, self.config.server_url)
+                reply = call_home(data, self.config)
                 log.debug("Got reply %s" % reply)
                 self.do_clock(reply)
                 try:
                     method = getattr(self, 'do_' + reply['action'])
                 except AttributeError:
                     log.debug("Cannot handle reply %s", reply)
-                if config.running: # state may have changed in the meantime
+                if app.running: # state may have changed in the meantime
                     method(reply['data'])
             except Exception as e:
                 log.debug("Got %s while calling home" % e)
