@@ -173,8 +173,9 @@ def get_ip_address(dev="eth0"):
     # else assume we're doing it in Linux and do it via SIOCGIFADDR
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        return socket.inet_ntoa(fcntl.ioctl(s.fileno(), 0x8915, struct.pack('256s', dev[:15]))[20:24])
-    except:
+        return socket.inet_ntoa(fcntl.ioctl(s.fileno(), 0x8915, struct.pack('256s', str(dev)[:15]))[20:24])
+    except Exception, e:
+        log.debug('Error getting IP address for %s: %s' % (dev,e))
         return None
 
 
@@ -183,6 +184,7 @@ def get_config(filename):
     try:
         config = Struct(json.load(open(filename, 'r')))
     except Exception, e:
+        # this is one of the few instanceis where we cannot rely on logging to be active
         print 'Error loading configuration file %s: %s' % (filename, e)
         sys.exit(2)
     return config

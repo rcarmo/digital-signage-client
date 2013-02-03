@@ -16,6 +16,9 @@ import bottle, utils
 
 # read configuration file and setup various globals
 config     = utils.get_config(os.path.join(utils.path_for('data'),'config.json'))
+# Set up logging
+logging.config.dictConfig(dict(config.logging))
+log        = logging.getLogger()
 # validate framebuffer settings
 config = utils.validate_resolution(config)
 # setup static file root
@@ -40,9 +43,6 @@ template_vars = {
     'debug'     : config.debug
 }
 
-# Set up logging
-logging.config.dictConfig(dict(config.logging))
-log = logging.getLogger()
 
 if __name__=='__main__':
     if config.debug:
@@ -85,7 +85,7 @@ if __name__=='__main__':
         else:
             # Signal for help and stay put. There's no point in debugging the LAN ourselves.
             uzbl = browser.Browser(config)
-            uzbl.do(config.command['local'] % 'nonet')
+            uzbl.do(config.uzbl.uri % (local_uri + '/nonet'))
             log.error("Failsafe mode")
 
     log.info("Serving requests.")

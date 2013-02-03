@@ -27,7 +27,7 @@
     "uzbl": {
         "__comment": "command patterns to make it easier to control uzbl-core",
         "local": "set uri = http://%(host)s:%(port)d/%(page)s",
-        "uri"  : "set uri = %(uri)s", 
+        "uri"  : "set uri = %s", 
         "ram": {
             "hard_limit": 114688,
             "soft_limit": 98304   
