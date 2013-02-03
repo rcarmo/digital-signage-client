@@ -8,12 +8,12 @@
             { "random": "meme" },
             { "uri": "/news/sapo",    "duration": 25 },
             { "uri": "/photos",       "duration": 25 },
-            { "random": "video" },
+            { "random": "video" }
         ],
         "random": {
             "meme": [
-                { "uri": "/pixelart",        "duration": 10 },
-                { "uri": "/qrcode",          "duration": 10 }
+                { "uri": "/pixelart", "duration": 10 },
+                { "uri": "/qrcode",   "duration": 10 }
             ],
             "video": [
                 { "file": "http://remote.host/movie.mp4" }
