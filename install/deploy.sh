@@ -1,13 +1,16 @@
 # set up X environment
 cp xinitrc ~/.xinitrc
 
+# set up X font hinting and subpixel rendering
+cp fonts.conf ~/.fonts.conf
+
 # set up uzbl
 mkdir -p ~/.config/uzbl
 
-# configuration
+# set up uzbl
 cp uzbl ~/.config/uzbl/config
 
-# custom CSS
+# mix in our custom user CSS
 cp userstyle.css ~/.config/uzbl/userstyle.css
 
 # hide GTK scrollbars
