@@ -80,15 +80,11 @@ The following steps assume you're deploying on the [Raspberry Pi][rpi] as the `p
 
         sudo apt-get update
         sudo apt-get dist-upgrade
-        sudo apt-get install git uzbl unclutter ttf-mscorefonts-installer vim tmux \
+        sudo apt-get install uzbl unclutter ttf-mscorefonts-installer vim tmux \
         x11-xserver-utils git-core ntpdate ack-grep denyhosts omxplayer watchdog
         sudo apt-get install git
 
 * Edit `/boot/config.txt` to set the framebuffer to 1280x720
-* Edit `/etc/rc.local` to include these lines before the final command:
-
-        fbset --xres 1280 --yres 720
-        sudo -u pi startx
 
 This will undo any automatic detection done during the boot process and start X with our own custom session (see the `install` directory for the startup scrips). 
 
@@ -119,6 +115,11 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
         sudo chkconfig watchdog on
         sudo /etc/init.d/watchdog start
         sudo sh -c "echo 'watchdog-device = /dev/watchdog' >> /etc/watchdog.conf"
+
+* Edit `/etc/rc.local` to include these lines before the final command:
+
+        fbset --xres 1280 --yres 720
+        sudo -u pi startx
 
 * reboot
 
