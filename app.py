@@ -26,7 +26,7 @@ staticroot = utils.path_for('static')
 # check if we have a valid IP address
 ip_address = utils.get_ip_address(config.interface)
 # Shared data used by other modules
-version    = '0.13.02.03.1'
+version    = '0.13.02.08.4'
 # Flag for controlled thread termination
 running    = True
 # Screen state sent from server
