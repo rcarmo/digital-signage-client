@@ -1,5 +1,5 @@
 {
-    "__comment": "example configuration file with (mostly sane) defaults"
+    "__comment": "example configuration file with (mostly sane) defaults",
     "debug": true,
     "staging": true,
     "interface": "eth0",
