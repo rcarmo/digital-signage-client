@@ -64,7 +64,7 @@ class Player(threading.Thread):
         log.debug('Playing video %s' % item)
         # Clear the screen first
         self.browser.blank()
-        if duration in item:
+        if 'duration' in item:
             self.video.launch(item['file'], int(item['duration']))
         else:
             self.video.launch(item['file'])
