@@ -9,7 +9,7 @@ License: MIT (see LICENSE for details)
 
 import os, sys, time, threading, json, random, logging, subprocess
 from Queue import Queue, Empty
-import app, beacon, utils, browser
+import app, beacon, utils, browser, video
 
 log = logging.getLogger()
 
@@ -22,6 +22,7 @@ class Player(threading.Thread):
         self.config         = config
         self.start_interval = start_interval
         self.browser        = browser
+        self.video          = video.Player(config)
         self.playlist       = self.read_playlist(playlist_name)
         self.local_uri      = 'http://%s:%s' % (config.http.bind_address, config.http.port)
 
@@ -63,12 +64,10 @@ class Player(threading.Thread):
         log.debug('Playing video %s' % item)
         # Clear the screen first
         self.browser.blank()
-        # we need to provide at least a valid stdin parameter,
-        # otherwise omxplayer will fail.
-        # Note that we force audio to "local" to mute HDMI output
-        subprocess.call('omxplayer -o local %s' % item['file'], 
-            stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE, shell=True)
+        if duration in item:
+            self.video.launch(item['file'], int(item['duration']))
+        else:
+            self.video.launch(item['file'])
         log.debug('Played video %s' % item)
         return True
 
