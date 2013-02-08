@@ -104,7 +104,7 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
 
 * **RECOMMENDED**: Disable `sshd` password authentication and add your public key to `/home/pi/.ssh/authorized_keys`.
 
-* **OPTIONAL**: use Hexxeh's `rpi-update` to upgrade to the latest firmware and kernel (this is of debatable value, but might improve `omxplayer` stability.)
+* **RECOMMENDED**: use Hexxeh's [rpi-update](https://github.com/Hexxeh/rpi-update) to upgrade to the latest firmware and kernel (this is a sad necessity since Raspbian broke `omxplayer` by not shipping the latest firmware...)
 
 * **RECOMMENDED**: enable the [Raspberry Pi][rpi]'s hardware watchdog so that it will automatically reset the board upon freezing:
 
