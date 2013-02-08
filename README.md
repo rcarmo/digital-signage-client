@@ -74,26 +74,28 @@ Here's a brief summary of the requirements and their impact on solution design:
 
 ## INSTALLATION
 
-The following steps assume you're deploying on the [Raspberry Pi][rpi] as the `pi` user.
+The following steps assume you're deploying on the [Raspberry Pi][rpi] as the `pi` user and starting from a clean Raspbian install.
 
-* Checkout the repository
-* Clone the repo (no surprises here)
-* Copy `data/config.json.dist` to `data/config.json`, making any required changes
-* install the following packages:
+* Bring your image up to date and install required packages:
 
-    	sudo apt-get install uzbl unclutter ttf-mscorefonts-installer vim tmux \
+        sudo apt-get update
+        sudo apt-get dist-upgrade
+        sudo apt-get install uzbl unclutter ttf-mscorefonts-installer vim tmux \
         x11-xserver-utils git-core ntpdate ack-grep denyhosts omxplayer watchdog
 
-* edit `/boot/config.txt` to set the framebuffer to 1280x720
-* edit `/etc/rc.local` to include these lines before the final command:
-
-        fbset --xres 1280 --yres 720
-        sudo -u pi startx
+* Edit `/boot/config.txt` to set the framebuffer to 1280x720
 
 This will undo any automatic detection done during the boot process and start X with our own custom session (see the `install` directory for the startup scrips). 
 
 In stock Raspbian, it will also make it harder for someone to log in at the console (but is not a proper "fix" for that - it's just simpler than tweaking `lxsession` and whatnot).
 
+* Clone the repo (no surprises here):
+
+        cd 
+        git clone https://github.com/sapo/digital-signage-client.git
+        cd digital-signage-client
+
+* Copy `data/config.json.dist` to `data/config.json`, making any required changes
 * run `install/deploy.sh` to setup the configuration files
 
 * **OPTIONAL**: change `sshd` to run on another port (even with `denyhosts`, it makes sense for some deployments) or block port 22 access from everywhere but the address(es) you'll be managing these from.
@@ -112,6 +114,11 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
         sudo chkconfig watchdog on
         sudo /etc/init.d/watchdog start
         sudo sh -c "echo 'watchdog-device = /dev/watchdog' >> /etc/watchdog.conf"
+
+* Edit `/etc/rc.local` to include these lines before the final command:
+
+        fbset --xres 1280 --yres 720
+        sudo -u pi startx
 
 * reboot
 
