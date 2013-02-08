@@ -1,7 +1,8 @@
 xset s off
 xset -dpms
 unclutter -root -idle 1 &
+cd ~/digital-signage-client
 while true; do
-  python ~/digital-signage-client/app.py 2>&1 >> /dev/null
+  python app.py 2>&1 >> /dev/null
   sleep 1
 done
