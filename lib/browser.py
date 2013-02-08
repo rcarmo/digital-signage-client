@@ -69,6 +69,11 @@ class Browser:
         self.launch(blank)
 
 
+    def blank(self):
+        """Blank the screen"""
+        self.do('set uri = %s' % blank)
+
+
     def do(self, buffer):
         """Perform a browser command by talking to its FIFO"""
         returncode = self.uzbl.poll()

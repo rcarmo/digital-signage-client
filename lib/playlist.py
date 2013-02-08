@@ -62,7 +62,7 @@ class Player(threading.Thread):
         """Play a video"""
         log.debug('Playing video %s' % item)
         # Clear the screen first
-        self.browser.do(self.config.command['uri'] % browser.blank)
+        self.browser.blank()
         # we need to provide at least a valid stdin parameter,
         # otherwise omxplayer will fail.
         # Note that we force audio to "local" to mute HDMI output
