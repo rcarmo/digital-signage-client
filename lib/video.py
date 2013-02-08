@@ -10,7 +10,6 @@ License: MIT (see LICENSE for details)
 import os, sys, time, logging
 from subprocess import *
 from threading import Timer
-from signal import alarm, signal, SIGALRM
 import utils
 
 log = logging.getLogger()
