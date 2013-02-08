@@ -41,6 +41,9 @@ class Player:
             alarm(timeout)
 
         try:
+            # we need to provide at least a valid stdin parameter,
+            # otherwise omxplayer will fail.
+            # Note that we force audio to "local" to mute HDMI output
             self.omxplayer = Popen(['/usr/bin/omxplayer','-o','local',uri], stdin=PIPE, stdout=PIPE, stderr=PIPE)
             alarm(0)
         except Alarm:
