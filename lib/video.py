@@ -17,7 +17,7 @@ log = logging.getLogger()
 
 def _handler(player):
     """Timer handler"""
-    player.kill()
+    player.terminate()
 
 
 class Player:
