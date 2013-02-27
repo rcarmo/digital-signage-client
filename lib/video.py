@@ -17,6 +17,7 @@ log = logging.getLogger()
 
 def _handler(player):
     """Timer handler"""
+    log.debug("Terminating player")
     player.terminate()
 
 
