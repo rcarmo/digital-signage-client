@@ -1,13 +1,13 @@
 SAPO DIGITAL SIGNAGE CLIENT
 ===========================
 
-## UPDATE (FEB 3 2013):
+## UPDATE (FEB 27 2013):
 
-The client is now almost fully working in standalone mode (except for video playback, which needs a bit further testing).
+The client is now fully working in standalone mode, including video playback (full or timed)
 
 Anyone who checks out the code can get it running out of the box on their local machine.
 
-Work is ongoing to finish refactoring and publishing the server side (it needs a little more cleanup than the client).
+Work is ongoing to finish refactoring and publishing the server side (it needs a lot more cleanup than the client).
 
 ## IMPORTANT NOTE
 
@@ -81,7 +81,8 @@ The following steps assume you're deploying on the [Raspberry Pi][rpi] as the `p
         sudo apt-get update
         sudo apt-get dist-upgrade
         sudo apt-get install uzbl unclutter ttf-mscorefonts-installer vim tmux \
-        x11-xserver-utils git-core ntpdate ack-grep denyhosts omxplayer watchdog
+        x11-xserver-utils git-core ntpdate ack-grep denyhosts omxplayer \
+        watchdog chkconfig
 
 * Edit `/boot/config.txt` to set the framebuffer to 1280x720
 
