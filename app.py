@@ -74,14 +74,12 @@ if __name__=='__main__':
                 log.info("Starting player thread")
                 p.start()
 
-                try:
-                    assert('http' in config.server_url)
+                if hasattr(config, 'server_url'):
                     b = beacon.Beacon(config, utils.get_mac_address(config.interface), ip_address, uzbl)
                     log.info("Starting beacon thread")
                     b.start()
-                except AssertionError:
+                else:
                     log.info("No server configured, operating in standalone mode.")
-                    pass
         else:
             # Signal for help and stay put. There's no point in debugging the LAN ourselves.
             uzbl = browser.Browser(config)
