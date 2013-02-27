@@ -37,7 +37,7 @@ class Beacon(threading.Thread):
 
 
     def call_home(self, data):
-    """Talk to the server and get back any queued actions."""
+        """Talk to the server and get back any queued actions."""
         data = urllib.urlencode(data)
         req = urllib2.Request(self.config.server_url, data, {'Version': app.version} )
         resp = self.opener.open(req, timeout=15)
