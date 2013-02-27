@@ -19,19 +19,6 @@ log = logging.getLogger()
 
 queue = Queue()
 
-def call_home(data, config):
-    """Talk to the server and get back any queued actions."""
-
-    conn = urllib2.build_opener(proxy.SmartRedirectHandler())
-    data = urllib.urlencode(data)
-    req = urllib2.Request(config.server_url, data, {'Version': app.version} )
-    resp = conn.open(req, timeout=15)
-    try:
-        actions = json.loads(resp.read().strip())
-        return actions
-    except:
-        return None
-
 
 class Beacon(threading.Thread):
     """Beacon thread that talks to the server and tries to obtain commands."""
@@ -46,6 +33,20 @@ class Beacon(threading.Thread):
         self.playlist       = 'Default'
         self.local_uri      = 'http://%s:%s' % (config.http.bind_address, config.http.port)
         self.send_logs      = False
+        self.opener         = urllib2.build_opener(proxy.SmartRedirectHandler())
+
+
+    def call_home(self, data):
+    """Talk to the server and get back any queued actions."""
+        data = urllib.urlencode(data)
+        req = urllib2.Request(self.config.server_url, data, {'Version': app.version} )
+        resp = self.opener.open(req, timeout=15)
+        try:
+            actions = json.loads(resp.read().strip())
+            return actions
+        except:
+            return None
+
 
     def do_update(self, item):
         """Perform a client update by dint of downloading a tarball and expanding it"""
@@ -137,8 +138,10 @@ class Beacon(threading.Thread):
     def run(self):
         """Thread main loop"""
         while(app.running):
+            time.sleep(self.poll_interval)
+            if not hasattr(self.config,'server_url'):
+                continue
             try:
-                time.sleep(self.poll_interval)
                 log.debug("Calling home...")
                 data = {
                     'playlist'    : self.playlist,
@@ -153,7 +156,7 @@ class Beacon(threading.Thread):
                 if self.send_logs:
                     data['logs'] = '\n'.join(utils.get_log_entries())
                     self.send_logs = False
-                reply = call_home(data, self.config)
+                reply = self.call_home(data)
                 log.debug("Got reply %s" % reply)
                 self.do_clock(reply)
                 try:
