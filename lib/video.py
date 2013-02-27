@@ -41,6 +41,7 @@ class Player:
         # otherwise omxplayer will fail.
         # Note that we force audio to "local" to mute HDMI output
         self.omxplayer = Popen(['/usr/bin/omxplayer','-o','local',uri], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        self.omxplayer.wait()
 
 
     def terminate(self):
