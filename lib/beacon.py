@@ -8,7 +8,7 @@ License: MIT (see LICENSE for details)
 """
 
 import os, sys, time, random, logging
-import urllib, urllib2, hashlib, shutil
+import urlparse, urllib, urllib2, hashlib, shutil
 import json, threading, subprocess
 from Queue import Queue, Empty
 
@@ -59,8 +59,9 @@ class Beacon(threading.Thread):
             # Rather simple-minded approach to update via a tar file
             # Improvements to this are welcome, but this is field-tested :)
             log.debug('Preparing to update %s' % item)
-            conn = urllib2.build_opener(proxy.SmartRedirectHandler())                        
-            req = urllib2.Request('%s/updates/%s' % (self.config.server, item['bundle']))
+            schema, host, _, _, _, _ = urlparse.urlparse(self.config.server_url)
+            conn = urllib2.build_opener(proxy.SmartRedirectHandler())
+            req = urllib2.Request('%s://%s/playlists/%s' % (schema, host, item['playlist']))
             try:
                 resp = conn.open(req, timeout=30)   
                 # Yes, we assume the update will always fit into RAM 
