@@ -55,13 +55,13 @@ class Beacon(threading.Thread):
             self.browser.do(self.config.uzbl.uri % (self.local_uri + 'updating.html'))
             # Signal other threads to quit cleanly
             app.running = False
-
+            
             # Rather simple-minded approach to update via a tar file
             # Improvements to this are welcome, but this is field-tested :)
             log.debug('Preparing to update %s' % item)
             schema, host, _, _, _, _ = urlparse.urlparse(self.config.server_url)
-            conn = urllib2.build_opener(proxy.SmartRedirectHandler())
-            req = urllib2.Request('%s://%s/playlists/%s' % (schema, host, item['playlist']))
+            conn = urllib2.build_opener(proxy.SmartRedirectHandler())                     
+            req = urllib2.Request('%s://%s/updates/%s' % (schema, host, item['bundle']))
             try:
                 resp = conn.open(req, timeout=30)   
                 # Yes, we assume the update will always fit into RAM 
@@ -83,8 +83,9 @@ class Beacon(threading.Thread):
 
     def do_playlist(self, item):
         log.debug('Preparing to update %s' % item)
-        conn = urllib2.build_opener(proxy.SmartRedirectHandler())                        
-        req = urllib2.Request('%s/playlists/%s' % (self.config.server + item['playlist']))
+        schema, host, _, _, _, _ = urlparse.urlparse(self.config.server_url)
+        conn = urllib2.build_opener(proxy.SmartRedirectHandler())
+        req = urllib2.Request('%s://%s/playlists/%s' % (schema, host, item['playlist']))
         try:
             resp = conn.open(req, timeout=30)
             # try to parse the playlist
