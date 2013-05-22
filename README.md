@@ -118,7 +118,7 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
 
 * Edit `/etc/rc.local` to include these lines before the final command:
 
-        fbset --xres 1280 --yres 720
+        fbset -xres 1280 -yres 720
         sudo -u pi startx
 
 * reboot
