@@ -124,6 +124,13 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
 * reboot
 
 
+## SD CARD IMAGES
+
+Due to popular demand, I have to state that there are none publicly available yet. Still, if there were, they'd be sized for a 4GB SD card (purely out of cost considerations) and could be created by doing something like:
+
+        # a 4GB image has 3904897024 bytes, and we can write it via rdisk devices faster 
+        sudo dd of=/dev/rdisk2 if=~/Desktop/signage.raw.img bs=4m count=931
+
 ## ON LOGGING
 
 Note that the app has built-in support for diagnostics logging (which is kept in RAM and can be sent back to the server if so desired). This is set up as the `ram` logger in `config.json.dist`.
