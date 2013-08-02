@@ -81,7 +81,7 @@ The following steps assume you're deploying on the [Raspberry Pi][rpi] as the `p
         sudo apt-get update
         sudo apt-get dist-upgrade
         sudo apt-get install uzbl unclutter ttf-mscorefonts-installer vim tmux \
-        x11-xserver-utils git-core ntpdate ack-grep denyhosts omxplayer \
+        x11-xserver-utils git-core ntpdate ack-grep denyhosts omxplayer htop \
         watchdog chkconfig
 
 * Edit `/boot/config.txt` to set the framebuffer to 1280x720
