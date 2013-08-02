@@ -33,6 +33,10 @@ class Struct(dict):
         except KeyError:
             raise AttributeError(attr)
 
+    def __setitem__(self, key, value):
+        super(Struct, self).__setitem__(key, value)
+        self.__dict__[key] = value
+
     def __setattr__(self, attr, value):
         self.__setitem__(attr, value)
 
@@ -114,11 +118,11 @@ def get_cpu_usage(interval=0.1):
     """Estimates overall CPU usage during a short time interval"""
     t1 = get_cpu_stat()
     time.sleep(interval)
-    t2 = get_cpu_stat() 
+    t2 = get_cpu_stat()
     delta = [t2[i] - t1[i] for i in range(len(t1))]
     try:
         return 1.0 - (delta[-1:].pop()/(sum(delta)*1.0))
-    except: 
+    except:
         return 0.0
 
 
