@@ -11,6 +11,7 @@ import os, sys, time, logging
 from subprocess import *
 from threading import Timer
 import utils
+from config import settings
 
 log = logging.getLogger()
 
@@ -22,9 +23,8 @@ def _handler(player):
 
 class Player:
 
-    def __init__(self, config):
+    def __init__(self):
         """Handle initialization."""
-        self.config = config
         self.omxplayer = self.timer = None
 
 

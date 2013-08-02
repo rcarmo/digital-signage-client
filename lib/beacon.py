@@ -14,6 +14,7 @@ from Queue import Queue, Empty
 
 # our own libraries
 import app, utils, proxy, browser
+from config import settings
 
 log = logging.getLogger()
 
@@ -23,14 +24,13 @@ queue = Queue()
 class Beacon(threading.Thread):
     """Beacon thread that talks to the server and tries to obtain commands."""
 
-    def __init__(self, config, mac_address, ip_address, browser = None, poll_interval = 11):
+    def __init__(self, mac_address, ip_address, browser = None, poll_interval = 11):
         threading.Thread.__init__(self)
-        self.config         = config
         self.mac_address    = mac_address
         self.ip_address     = ip_address
         self.poll_interval  = poll_interval
         self.browser        = browser
-        self.local_uri      = 'http://%s:%s' % (config.http.bind_address, config.http.port)
+        self.local_uri      = 'http://%s:%s' % (settings.http.bind_address, settings.http.port)
         self.send_logs      = False
         self.opener         = urllib2.build_opener(proxy.SmartRedirectHandler())
 
@@ -38,7 +38,7 @@ class Beacon(threading.Thread):
     def call_home(self, data):
         """Talk to the server and get back any queued actions."""
         data = urllib.urlencode(data)
-        req = urllib2.Request(self.config.server_url, data, {'Version': app.version} )
+        req = urllib2.Request(settings.server_url, data, {'Version': app.version} )
         resp = self.opener.open(req, timeout=15)
         try:
             actions = json.loads(resp.read().strip())
@@ -51,14 +51,14 @@ class Beacon(threading.Thread):
         """Perform a client update by dint of downloading a tarball and expanding it"""
 
         if 'bundle' in item:
-            self.browser.do(self.config.uzbl.uri % (self.local_uri + 'updating.html'))
+            self.browser.do(settings.uzbl.uri % (self.local_uri + 'updating.html'))
             # Signal other threads to quit cleanly
             app.running = False
             
             # Rather simple-minded approach to update via a tar file
             # Improvements to this are welcome, but this is field-tested :)
             log.debug('Preparing to update %s' % item)
-            schema, host, _, _, _, _ = urlparse.urlparse(self.config.server_url)
+            schema, host, _, _, _, _ = urlparse.urlparse(settings.server_url)
             conn = urllib2.build_opener(proxy.SmartRedirectHandler())                     
             req = urllib2.Request('%s://%s/updates/%s' % (schema, host, item['bundle']))
             try:
@@ -82,14 +82,14 @@ class Beacon(threading.Thread):
 
     def do_playlist(self, item):
         log.debug('Preparing to update %s' % item)
-        schema, host, _, _, _, _ = urlparse.urlparse(self.config.server_url)
+        schema, host, _, _, _, _ = urlparse.urlparse(settings.server_url)
         conn = urllib2.build_opener(proxy.SmartRedirectHandler())
         req = urllib2.Request('%s://%s/playlists/%s' % (schema, host, item['playlist']))
         try:
             resp = conn.open(req, timeout=30)
             # try to parse the playlist
             playlist = json.loads(resp.read())
-            self.config.content.playlist_name = playlist['playlist']['name']
+            settings.content.playlist_name = playlist['playlist']['name']
             # hand it over to the other thread
             queue.put({'playlist': playlist})
         except Exception as e:
@@ -140,12 +140,12 @@ class Beacon(threading.Thread):
         """Thread main loop"""
         while(app.running):
             time.sleep(self.poll_interval)
-            if not hasattr(self.config,'server_url'):
+            if not hasattr(settings,'server_url'):
                 continue
             try:
                 log.debug("Calling home...")
                 data = {
-                    'playlist'    : self.config.content.playlist_name,
+                    'playlist'    : settings.content.playlist_name,
                     'mac_address' : self.mac_address,
                     'ip_address'  : self.ip_address,
                     'cpu_freq'    : utils.get_cpu_freq(),

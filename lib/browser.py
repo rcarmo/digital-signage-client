@@ -11,6 +11,7 @@ import os, sys, time, logging
 from subprocess import *
 import resource
 import utils
+from config import settings
 
 log = logging.getLogger()
 
@@ -28,9 +29,8 @@ def setrlimit():
 
 class Browser:
 
-    def __init__(self, config, home=blank):
+    def __init__(self, home=blank):
         """Handle initialization."""
-        self.config = config
         self.home = home
         # launch subprocess
         self.launch(self.home)
@@ -41,9 +41,9 @@ class Browser:
     def launch(self, home=blank):
         """Launch uzbl"""
 
-        _threshold = self.config.uzbl.ram.hard_limit
+        _threshold = settings.uzbl.ram.hard_limit
         # Note that we explicitely set the geometry here as well (besides rlimit)
-        self.uzbl = Popen(['/usr/bin/uzbl-core','--geometry=%dx%d+0+0' % (self.config.screen.width, self.config.screen.height),'--uri=%s' % home], stdin=PIPE, stdout=PIPE, preexec_fn=setrlimit)
+        self.uzbl = Popen(['/usr/bin/uzbl-core','--geometry=%dx%d+0+0' % (settings.screen.width, settings.screen.height),'--uri=%s' % home], stdin=PIPE, stdout=PIPE, preexec_fn=setrlimit)
         # Grab the right FIFO filename for controlling the browser
         self.fifo = '/tmp/uzbl_fifo_%d' % self.uzbl.pid
         # ...But it usually takes a few seconds to be created
@@ -80,7 +80,7 @@ class Browser:
         if returncode == None: # still running
             # Even though we're using rlimit, the kill/respawn cycle tends to
             # flash the screen, so we'll still try to do controlled restarts
-            if self.config.uzbl.ram.soft_limit < utils.get_pid_rss(self.uzbl.pid):
+            if settings.uzbl.ram.soft_limit < utils.get_pid_rss(self.uzbl.pid):
                 log.debug("Restarting browser due to memory leak")
                 self.restart()
             h = open(self.fifo,'a')

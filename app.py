@@ -14,82 +14,82 @@ sys.path.insert(0,'lib') # prefer bundled libraries to local installs
 
 import bottle, utils
 
-# read configuration file and setup various globals
-config     = utils.get_config(os.path.join(utils.path_for('data'),'config.json'))
+# read configuration file and setup various globals, including logging formats
+from config import settings
+
 # Set up logging
-logging.config.dictConfig(dict(config.logging))
 log        = logging.getLogger()
 # validate framebuffer settings
-config = utils.validate_resolution(config)
+settings = utils.validate_resolution(settings)
 # setup static file root
 staticroot = utils.path_for('static')
 # check if we have a valid IP address
-ip_address = utils.get_ip_address(config.interface)
+ip_address = utils.get_ip_address(settings.interface)
 # Shared data used by other modules
-version    = '0.13.02.27.6'
+version    = '0.13.08.02.1'
 # Flag for controlled thread termination
 running    = True
 # Screen state sent from server
 screen     = {}
 # Local URI Prefix
-local_uri  = 'http://%s:%s' % (config.http.bind_address, config.http.port)
+local_uri  = 'http://%s:%s' % (settings.http.bind_address, settings.http.port)
 
 # Defaults sent to templates
 template_vars = {
     'version'   : version,
     'ip_address': ip_address,
-    'width'     : config.screen.width,
-    'height'    : config.screen.height,
-    'debug'     : config.debug
+    'width'     : settings.screen.width,
+    'height'    : settings.screen.height,
+    'debug'     : settings.debug
 }
 
 
 if __name__=='__main__':
-    if config.debug:
+    if settings.debug:
         if 'BOTTLE_CHILD' not in os.environ:
             log.debug('Using reloader, spawning first child.')
         else:
             log.debug('Child spawned.')
 
-    if not config.debug or ('BOTTLE_CHILD' in os.environ):
+    if not settings.debug or ('BOTTLE_CHILD' in os.environ):
         log.info("Setting up application.")
         import routes, playlist, browser, beacon, video
 
         # Check if another instance is still running
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((config.http.bind_address,config.http.port))
+            s.connect(settings.http.bind_address, settings.http.port))
             print "Server already running, exiting."
             sys.exit(2)
         except socket.error, msg:
             pass
         log.info("Socket free.")
 
-        if ip_address or config.staging:
+        if ip_address or settings.staging:
             uzbl = None
-            if not config.staging:
+            if not settings.staging:
                 # Get the browser going
-                uzbl = browser.Browser(config)
-                p = playlist.Player(config, uzbl, 'playlist.json')
+                uzbl = browser.Browser()
+                p = playlist.Player(uzbl, 'playlist.json')
                 log.info("Starting player thread")
                 p.start()
 
-                if hasattr(config, 'server_url'):
-                    b = beacon.Beacon(config, utils.get_mac_address(config.interface), ip_address, uzbl)
+                if hasattr(settings, 'server_url'):
+                    b = beacon.Beacon( utils.get_mac_address(settings.interface), ip_address, uzbl)
                     log.info("Starting beacon thread")
                     b.start()
                 else:
                     log.info("No server configured, operating in standalone mode.")
         else:
             # Signal for help and stay put. There's no point in debugging the LAN ourselves.
-            uzbl = browser.Browser(config)
-            uzbl.do(config.uzbl.uri % (local_uri + '/nonet'))
+            uzbl = browser.Browser()
+            uzbl.do(settings.uzbl.uri % (local_uri + '/nonet'))
             log.error("Failsafe mode")
 
     log.info("Serving requests.")
     bottle.run(
-        port     = config.http.port, 
-        host     = config.http.bind_address, 
-        debug    = config.debug,
-        reloader = config.debug
+        port     = settings.http.port, 
+        host     = settings.http.bind_address, 
+        debug    = settings.debug,
+        reloader = settings.debug
     )

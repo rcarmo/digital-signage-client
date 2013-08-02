@@ -10,29 +10,29 @@ License: MIT (see LICENSE for details)
 import os, sys, time, threading, json, random, logging, subprocess
 from Queue import Queue, Empty
 import app, beacon, utils, browser, video
+from config import settings
 
 log = logging.getLogger()
 
 class Player(threading.Thread):
 
-    def __init__(self, config, browser, filename='default.json', start_interval=10):
+    def __init__(self, browser, filename='default.json', start_interval=10):
         """Initialization"""
         
         threading.Thread.__init__(self)
-        self.config         = config
         self.start_interval = start_interval
         self.browser        = browser
-        self.video          = video.Player(config)
+        self.video          = video.Player()
         self.filename       = filename
         self.playlist       = self.read_playlist(filename)
-        self.local_uri      = 'http://%s:%s' % (config.http.bind_address, config.http.port)
+        self.local_uri      = 'http://%s:%s' % (settings.http.bind_address, settings.http.port)
 
     def read_playlist(self, name):
         """Retrieve playlist data from a JSON file"""
         try:
             playlist = json.loads(open(os.path.join(utils.path_for('data'), 
                 '%s' % name),'r').read())['playlist']
-            self.config.content.playlist_name = playlist['playlist']['name']
+            settings.content.playlist_name = playlist['playlist']['name']
         except Exception, e:
             log.error('Error %s loading playlist "%s", attempting to fallback to default' % (e,name))
             playlist = json.loads(open(os.path.join(utils.path_for('data'),
@@ -52,7 +52,7 @@ class Player(threading.Thread):
         # if playlist has schemaless URIs, assume they're local
         if item['uri'][0] == '/':
             item['uri'] = self.local_uri + item['uri']
-        self.browser.do(self.config.uzbl.uri % item['uri'])
+        self.browser.do(settings.uzbl.uri % item['uri'])
         try:
             time.sleep(item['duration'])
         except:
