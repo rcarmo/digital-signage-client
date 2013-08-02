@@ -121,6 +121,11 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
         fbset -xres 1280 -yres 720
         sudo -u pi startx
 
+* Disable swap (yes, really):
+
+        sudo swapoff --all
+        sudo apt-get remove dphys-swapfile 
+
 * reboot
 
 
