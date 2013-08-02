@@ -11,4 +11,4 @@ except NameError:
         sys.exit(2)
         logging.config.dictConfig(dict(settings.logging))
         log = logging.getLogger()
-        log.info("Logging configured."
+        log.info("Logging configured.")
