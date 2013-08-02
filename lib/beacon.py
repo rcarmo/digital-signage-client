@@ -30,7 +30,6 @@ class Beacon(threading.Thread):
         self.ip_address     = ip_address
         self.poll_interval  = poll_interval
         self.browser        = browser
-        self.playlist       = 'Default'
         self.local_uri      = 'http://%s:%s' % (config.http.bind_address, config.http.port)
         self.send_logs      = False
         self.opener         = urllib2.build_opener(proxy.SmartRedirectHandler())
@@ -90,7 +89,7 @@ class Beacon(threading.Thread):
             resp = conn.open(req, timeout=30)
             # try to parse the playlist
             playlist = json.loads(resp.read())
-            self.playlist = playlist['playlist']['name']
+            self.config.content.playlist_name = playlist['playlist']['name']
             # hand it over to the other thread
             queue.put({'playlist': playlist})
         except Exception as e:
@@ -146,7 +145,7 @@ class Beacon(threading.Thread):
             try:
                 log.debug("Calling home...")
                 data = {
-                    'playlist'    : self.playlist,
+                    'playlist'    : self.config.content.playlist_name,
                     'mac_address' : self.mac_address,
                     'ip_address'  : self.ip_address,
                     'cpu_freq'    : utils.get_cpu_freq(),

@@ -15,7 +15,7 @@ log = logging.getLogger()
 
 class Player(threading.Thread):
 
-    def __init__(self, config, browser, playlist_name='default.json', start_interval=10):
+    def __init__(self, config, browser, filename='default.json', start_interval=10):
         """Initialization"""
         
         threading.Thread.__init__(self)
@@ -23,7 +23,8 @@ class Player(threading.Thread):
         self.start_interval = start_interval
         self.browser        = browser
         self.video          = video.Player(config)
-        self.playlist       = self.read_playlist(playlist_name)
+        self.filename       = filename
+        self.playlist       = self.read_playlist(filename)
         self.local_uri      = 'http://%s:%s' % (config.http.bind_address, config.http.port)
 
     def read_playlist(self, name):
@@ -31,10 +32,11 @@ class Player(threading.Thread):
         try:
             playlist = json.loads(open(os.path.join(utils.path_for('data'), 
                 '%s' % name),'r').read())['playlist']
+            self.config.content.playlist_name = playlist['playlist']['name']
         except Exception, e:
             log.error('Error %s loading playlist "%s", attempting to fallback to default' % (e,name))
             playlist = json.loads(open(os.path.join(utils.path_for('data'),
-                'default.json'),'r').read())['playlist']
+                self.filename),'r').read())['playlist']
         return playlist
 
 
@@ -77,7 +79,7 @@ class Player(threading.Thread):
         self.playlist = item['playlist']['playlist']
         # persist the playlist as the default for this player
         f = open(os.path.join(utils.path_for('data'),
-            'default.json'),'w').write(json.dumps(item['playlist'], 2))
+            self.filename),'w').write(json.dumps(item['playlist'], 2))
         return False
 
 
