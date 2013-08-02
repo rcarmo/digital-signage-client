@@ -30,12 +30,12 @@ class Player(threading.Thread):
     def read_playlist(self, name):
         """Retrieve playlist data from a JSON file"""
         try:
-            playlist = json.loads(open(os.path.join(utils.path_for('data'), 
+            playlist = json.loads(open(os.path.join(utils.path_for('etc'), 
                 '%s' % name),'r').read())['playlist']
             settings.content.playlist_name = playlist['playlist']['name']
         except Exception, e:
             log.error('Error %s loading playlist "%s", attempting to fallback to default' % (e,name))
-            playlist = json.loads(open(os.path.join(utils.path_for('data'),
+            playlist = json.loads(open(os.path.join(utils.path_for('etc'),
                 self.filename),'r').read())['playlist']
         return playlist
 
@@ -78,7 +78,7 @@ class Player(threading.Thread):
         """Set current playlist"""
         self.playlist = item['playlist']['playlist']
         # persist the playlist as the default for this player
-        f = open(os.path.join(utils.path_for('data'),
+        f = open(os.path.join(utils.path_for('etc'),
             self.filename),'w').write(json.dumps(item['playlist'], 2))
         return False
 
