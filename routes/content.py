@@ -10,6 +10,7 @@ License: MIT (see LICENSE for details)
 import os, sys, logging, random
 import bottle
 import app, proxy, utils
+from config import settings
 
 log = logging.getLogger()
 
@@ -67,7 +68,7 @@ def tweets():
     """Renders the twitter stream"""
     app.template_vars.update({
         'title'  : 'Twitter feed',
-        'query'  : app.config.content.twitter
+        'query'  : settings.content.twitter
     })
     app.template_vars.update(app.screen)
     return app.template_vars
