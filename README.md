@@ -18,7 +18,7 @@ This is being released as-is mostly to enable people to learn from it and use th
 ## SETTING UP FOR TESTING AND DEVELOPMENT
 
 * Clone the repo (no surprises here)
-* Copy `data/config.json.dist` to `data/config.json`, making any required changes
+* Copy `etc/config.json.dist` to `etc/config.json`, making any required changes
 * Run it:
 
         python app.py
@@ -96,7 +96,7 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
         git clone https://github.com/sapo/digital-signage-client.git
         cd digital-signage-client
 
-* Copy `data/config.json.dist` to `data/config.json`, making any required changes
+* Copy `etc/config.json.dist` to `etc/config.json`, making any required changes
 * run `install/deploy.sh` to setup the configuration files
 
 * **OPTIONAL**: change `sshd` to run on another port (even with `denyhosts`, it makes sense for some deployments) or block port 22 access from everywhere but the address(es) you'll be managing these from.
@@ -124,7 +124,19 @@ In stock Raspbian, it will also make it harder for someone to log in at the cons
 * Disable swap (yes, really):
 
         sudo swapoff --all
+        sudo dphys-swapfile swapoff
+        sudo chkconfig dphys-swapfile off
         sudo apt-get remove dphys-swapfile 
+        sudo rm /var/swap
+
+* Add the following line to `/etc/default/rcS`:
+
+        RAMTMP=yes
+
+* Add the following lines to `/etc/fstab`:
+
+        tmpfs           /tmp            tmpfs   nodev,nosuid,size=16M,mode=1777    0    0
+        tmpfs           /var/log        tmpfs   nodev,nosuid,size=16M,mode=1777    0    0
 
 * reboot
 
