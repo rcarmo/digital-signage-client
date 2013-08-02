@@ -5,7 +5,7 @@ try:
     settings
 except NameError:
     try:
-        settings = get_config(path_for(os.path.join('..','etc','config.json')))
+        settings = get_config(path_for(os.path.join('etc','config.json')))
     except Exception as e:
         print >> sys.stderr, ("Error while loading configuration file" % locals())
         sys.exit(2)
