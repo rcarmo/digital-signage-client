@@ -1,19 +1,12 @@
 SAPO DIGITAL SIGNAGE CLIENT
 ===========================
 
-## UPDATE (FEB 27 2013):
+## UPDATE (AUG 2ND 2013):
 
-The client is now fully working in standalone mode, including video playback (full or timed)
+A niggling bug with persisting playlists is now fixed, and this is considered stable code. Further development will be done server-side, [here](https://github.com/sapo/digital-signage-server). Besides HTML pages, live streaming and video URLs are working as well as possible given hardware limitations.
 
 Anyone who checks out the code can get it running out of the box on their local machine.
 
-Work is ongoing to finish refactoring and publishing the server side (it needs a lot more cleanup than the client).
-
-## IMPORTANT NOTE
-
-> This repository currently contains sources for _the client only_.  The server code will follow in a separate repository.
-
-This is being released as-is mostly to enable people to learn from it and use the client in standalone mode.
 
 ## SETTING UP FOR TESTING AND DEVELOPMENT
 
