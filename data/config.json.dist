@@ -1,5 +1,5 @@
 {
-    "__comment": "example configuration file with (mostly sane) defaults",
+    "#": "example configuration file with (mostly sane) defaults",
     "debug": true,
     "staging": true,
     "interface": "eth0",
@@ -8,16 +8,16 @@
         "bind_address": "127.0.0.1",
         "port"        : 8000
     },
-    "__comment": "if server_url is not set, we'll operate in standalone mode",
+    "#": "if server_url is not set, we'll operate in standalone mode",
     "server_url": "http://signage.local/api/beacon",
     "screen": {
-        "__comment": "default resolution we'll be running at",
+        "#": "default resolution we'll be running at",
         "width": 1280,
         "height": 720
     },
     "content": {
         "feeds": {
-            "__comment": "service feed examples",
+            "#": "service feed examples",
             "photos"  : "http://services.sapo.pt/Photos/RSS/pesquisa/?termos=codebits2012&o=maisrecentes&limit=40",
             "codebits": "https://codebits.eu/rss",
             "sapo"    : "http://noticias.sapo.pt/rss/news/"
@@ -25,7 +25,7 @@
         "twitter": "#codebits OR from:meopt OR from:sapo OR from:radarsapo OR from:PortugalTelecom OR from:cloudpt OR from:tmnpt"
     },
     "uzbl": {
-        "__comment": "command patterns to make it easier to control uzbl-core",
+        "#": "command patterns to make it easier to control uzbl-core",
         "local": "set uri = http://%(host)s:%(port)d/%(page)s",
         "uri"  : "set uri = %s", 
         "ram": {
