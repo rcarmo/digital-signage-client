@@ -37,6 +37,7 @@ class Player(threading.Thread):
             log.error('Error %s loading playlist "%s", attempting to fallback to default' % (e,name))
             playlist = json.loads(open(os.path.join(utils.path_for('etc'),
                 self.filename),'r').read())['playlist']
+            settings.content.playlist_name = playlist['playlist']['name']
         return playlist
 
 
