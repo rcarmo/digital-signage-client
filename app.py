@@ -58,7 +58,7 @@ if __name__=='__main__':
         # Check if another instance is still running
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect(settings.http.bind_address, settings.http.port)
+            s.connect((settings.http.bind_address, settings.http.port))
             print "Server already running, exiting."
             sys.exit(2)
         except socket.error, msg:
