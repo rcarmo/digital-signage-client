@@ -65,26 +65,20 @@ if __name__=='__main__':
             pass
         log.info("Socket free.")
 
-        if ip_address or settings.staging:
-            uzbl = None
-            if not settings.staging:
-                # Get the browser going
-                uzbl = browser.Browser()
-                p = playlist.Player(uzbl, 'playlist.json')
-                log.info("Starting player thread")
-                p.start()
-
-                if hasattr(settings, 'server_url'):
-                    b = beacon.Beacon( utils.get_mac_address(settings.interface), ip_address, uzbl)
-                    log.info("Starting beacon thread")
-                    b.start()
-                else:
-                    log.info("No server configured, operating in standalone mode.")
-        else:
-            # Signal for help and stay put. There's no point in debugging the LAN ourselves.
+        uzbl = None
+        if not settings.staging:
+            # Get the browser going
             uzbl = browser.Browser()
-            uzbl.do(settings.uzbl.uri % (local_uri + '/nonet'))
-            log.error("Failsafe mode")
+            p = playlist.Player(uzbl, 'playlist.json')
+            log.info("Starting player thread")
+            p.start()
+
+            if hasattr(settings, 'server_url'):
+                b = beacon.Beacon( utils.get_mac_address(settings.interface), uzbl)
+                log.info("Starting beacon thread")
+                b.start()
+            else:
+                log.info("No server configured, operating in standalone mode.")
 
     log.info("Serving requests.")
     bottle.run(
