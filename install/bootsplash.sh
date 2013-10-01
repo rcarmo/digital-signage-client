@@ -12,12 +12,15 @@
 
 do_start () {
     # change to a new (blank) console
-    chvt 2
+    chvt 3
     # get the boot animation going
     cd /tmp
     nohup /usr/bin/omxplayer -o local /root/boot.mov > /dev/null 2>&1 &
+    # set the background in the meantime, after the movie starts playing
+    sleep 5
+    /usr/bin/fbi -1 -t 60 -d /dev/fb0 -T 3 -noverbose -a /root/blank.png > /dev/null 2>&1 
     # use this instead if you prefer a static image
-    #/usr/bin/fbi -1 -t 60 -d /dev/fb0 -T 2 -noverbose -a /root/boot.png > /dev/null 2>&1
+    #/usr/bin/fbi -1 -t 60 -d /dev/fb0 -T 3 -noverbose -a /root/boot.png > /dev/null 2>&1
     exit 0
 }
 

@@ -13,14 +13,13 @@
 do_start () {
     # change to a different, blank console
     chvt 3 
-    # kill any running players
-    killall -9 fbi > /dev/null 2>&1 
-    # set the background
-    /usr/bin/fbi -1 -t 60 -d /dev/fb0 -T 3 -noverbose -a /root/blank.png > /dev/null 2>&1 &
     # play the ready animation
     cd /tmp
     killall -9 omxplayer.bin > /dev/null 2>&1 
     NOREFRESH=1 /usr/bin/omxplayer /root/ready.mov > /dev/null 2>&1 &
+    # set the background
+    sleep 5
+    /usr/bin/fbi -1 -t 60 -d /dev/fb0 -T 3 -noverbose -a /root/blank.png > /dev/null 2>&1 &
     # get the client going
     cd /root/digital-signage-client
     python ./app.py > /dev/null 2>&1 & 
