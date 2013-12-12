@@ -84,6 +84,8 @@ class Browser:
                 log.debug("Restarting browser due to memory leak")
                 self.restart()
             h = open(self.fifo,'a')
+            # Remove the status bar (failsafe in case some error condition triggers it)
+            h.write("set show_status = 0\n")
             h.write(buffer + '\n')
             h.close()
         else:
