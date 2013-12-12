@@ -32,12 +32,12 @@ class Player(threading.Thread):
         try:
             playlist = json.loads(open(os.path.join(utils.path_for('etc'), 
                 '%s' % name),'r').read())['playlist']
-            settings.content.playlist_name = playlist['playlist']['name']
+            settings.content.playlist_name = playlist['name']
         except Exception, e:
             log.error('Error %s loading playlist "%s", attempting to fallback to default' % (e,name))
             playlist = json.loads(open(os.path.join(utils.path_for('etc'),
                 self.filename),'r').read())['playlist']
-            settings.content.playlist_name = playlist['playlist']['name']
+            settings.content.playlist_name = playlist['name']
         return playlist
 
 
