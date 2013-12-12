@@ -18,3 +18,8 @@ cp gtkrc ~/.gtkrc-2.0
 
 # sane vim defaults for remote maintenance
 cp vimrc ~/.vimrc
+
+# move .local to tmp
+rm -rf ~/.local
+mkdir /tmp/.local
+ln -s /tmp/.local ~/.local
