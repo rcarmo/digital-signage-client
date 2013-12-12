@@ -1,6 +1,9 @@
 xset s off
 xset -dpms
 unclutter -root -idle 1 &
+rm -rf /tmp/.local
+mkdir /tmp/.local
+ln -s /tmp/.local ~/.local
 cd ~/digital-signage-client
 while true; do
   python app.py 2>&1 >> /dev/null
