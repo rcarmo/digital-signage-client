@@ -8,8 +8,11 @@
         "bind_address": "127.0.0.1",
         "port"        : 8000
     },
+    "cookies": {
+        "#": "site: [{},{}] pairs listing cookies we want to set for specific sites",
+    },
     "#": "if server_url is not set, we'll operate in standalone mode",
-    "server_url": "http://signage.local/api/beacon",
+    "_server_url": "http://signage.local/api/beacon",
     "screen": {
         "#": "default resolution we'll be running at",
         "width": 1280,
@@ -26,8 +29,9 @@
     },
     "uzbl": {
         "#": "command patterns to make it easier to control uzbl-core",
-        "local": "set uri = http://%(host)s:%(port)d/%(page)s",
-        "uri"  : "set uri = %s", 
+        "local" : "set uri = http://%(host)s:%(port)d/%(page)s",
+        "uri"   : "set uri = %s", 
+        "cookie": "add_cookie %(domain)s %(path)s %(name)s %(value)s %(scheme)s %(expires)s",
         "ram": {
             "hard_limit": 114688,
             "soft_limit": 98304   
