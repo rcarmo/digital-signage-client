@@ -11,6 +11,7 @@ import os, sys, time, threading, json, random, logging, subprocess
 from Queue import Queue, Empty
 import app, beacon, utils, browser, video
 from config import settings
+import urlparse
 
 log = logging.getLogger()
 
@@ -53,6 +54,16 @@ class Player(threading.Thread):
         # if playlist has schemaless URIs, assume they're local
         if item['uri'][0] == '/':
             item['uri'] = self.local_uri + item['uri']
+        scheme, netloc, path, params, query, fragment = urlparse.urlparse(item['uri'])
+        log.debug(netloc)
+        if netloc in settings.cookies:
+            for cookie in settings.cookies[netloc]:
+                log.debug(cookie)
+                # sane defaults
+                data = { "domain": "", "path": "", "name": "", "value": "", "scheme": "", "expires": "" }
+                data.update(cookie)
+                self.browser.do(settings.uzbl.cookie % data)
+            self.browser.blank()
         self.browser.do(settings.uzbl.uri % item['uri'])
         try:
             time.sleep(item['duration'])

@@ -20,6 +20,7 @@ cp gtkrc ~/.gtkrc-2.0
 cp vimrc ~/.vimrc
 
 # move .local to tmp
+rm -rf /tmp/.local
 rm -rf ~/.local
 mkdir /tmp/.local
 ln -s /tmp/.local ~/.local
