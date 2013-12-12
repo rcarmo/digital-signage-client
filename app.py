@@ -20,7 +20,7 @@ from config import settings
 # Set up logging
 log        = logging.getLogger()
 # validate framebuffer settings
-settings = utils.check_resolution(settings)
+settings   = utils.check_resolution(settings)
 # setup static file root
 staticroot = utils.path_for('static')
 # check if we have a valid IP address

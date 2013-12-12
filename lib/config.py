@@ -9,6 +9,6 @@ except NameError:
     except Exception as e:
         print >> sys.stderr, ("Error while loading configuration file" % locals())
         sys.exit(2)
-        logging.config.dictConfig(dict(settings.logging))
-        log = logging.getLogger()
-        log.info("Logging configured.")
+    logging.config.dictConfig(dict(settings.logging))
+    log = logging.getLogger()
+    log.info("Logging configured.")
