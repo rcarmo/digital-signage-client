@@ -58,12 +58,12 @@ class Player(threading.Thread):
         log.debug(netloc)
         if netloc in settings.cookies:
             for cookie in settings.cookies[netloc]:
-                log.debug(cookie)
                 # sane defaults
-                data = { "domain": "", "path": "", "name": "", "value": "", "scheme": "", "expires": "" }
-                data.update(cookie)
-                self.browser.do(settings.uzbl.cookie % data)
-            self.browser.blank()
+                data = { "domain": "", "path": "", "name": "", "value": "", "scheme": '"http"', "expires": '"%d"' % int(time.time() + 3600) }
+                for k in cookie.keys():
+                    data[k] = '"%s"' % cookie[k]
+                action = settings.uzbl.cookie % data
+                self.browser.do(action.strip())
         self.browser.do(settings.uzbl.uri % item['uri'])
         try:
             time.sleep(item['duration'])

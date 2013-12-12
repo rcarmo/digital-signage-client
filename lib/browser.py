@@ -43,7 +43,7 @@ class Browser:
 
         _threshold = settings.uzbl.ram.hard_limit
         # Note that we explicitely set the geometry here as well (besides rlimit)
-        self.uzbl = Popen(['/usr/bin/uzbl','-p','--geometry=%dx%d+0+0' % (settings.screen.width, settings.screen.height),'--uri=%s' % home], stdin=PIPE, stdout=PIPE, stderr=PIPE, preexec_fn=setrlimit)
+        self.uzbl = Popen(['/usr/bin/uzbl-core','--geometry=%dx%d+0+0' % (settings.screen.width, settings.screen.height),'--uri=%s' % home], stdin=PIPE, stdout=PIPE, stderr=PIPE, preexec_fn=setrlimit)
         # Grab the right FIFO filename for controlling the browser
         self.fifo = '/tmp/uzbl_fifo_%d' % self.uzbl.pid
         # ...But it usually takes a few seconds to be created
