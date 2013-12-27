@@ -77,7 +77,7 @@ The following steps assume you're deploying on the [Raspberry Pi][rpi] as the `p
         sudo apt-get install ack-grep bash-completion chkconfig denyhosts \
         fbi git-core htop ntpdate omxplayer python-pygments tmux \
         ttf-mscorefonts-installer unclutter uzbl vim watchdog x11-xserver-utils \
-        xinit xserver-xorg-video-fbdev
+        xinit xserver-xorg-video-fbturbo
 
 * Edit `/boot/config.txt` (`moebius.config` will take you there if you choose `Internals`) to set the framebuffer to 1280x720 by uncommenting these two lines:
 
