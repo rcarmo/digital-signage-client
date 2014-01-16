@@ -53,7 +53,7 @@ def no_network():
 @view('generic/debug')
 def dump_debug():
     """Debug screen (active routes)"""
-    if not app.config.debug:
+    if not app.settings.debug:
         abort(400, "Access Denied")
     app.template_vars.update({
         'title': 'Debug information',
@@ -66,7 +66,7 @@ def dump_debug():
 def dump_logs():
     """Dump log entries from in-memory logger"""
 
-    if not app.config.debug:
+    if not app.settings.debug:
         abort(400, "Access Denied")
     response.content_type = 'text/plain'
     return '\n'.join(utils.get_log_entries())

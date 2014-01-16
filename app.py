@@ -17,6 +17,8 @@ import bottle, utils
 # read configuration file and setup various globals, including logging formats
 from config import settings
 
+import gtk, pygtk
+
 # Set up logging
 log        = logging.getLogger()
 # validate framebuffer settings
@@ -33,6 +35,13 @@ running    = True
 screen     = {}
 # Local URI Prefix
 local_uri  = 'http://%s:%s' % (settings.http.bind_address, settings.http.port)
+
+window = gtk.Window()
+screen = window.get_screen()
+
+if not settings.staging:
+    settings.screen.width = int(screen.get_width())
+    settings.screen.height = int(screen.get_height())
 
 # Defaults sent to templates
 template_vars = {
