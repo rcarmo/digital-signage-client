@@ -1,13 +1,19 @@
 SAPO DIGITAL SIGNAGE CLIENT
 ===========================
 
+## PROJECT STATUS (MAY 2ND 2014):
+
+Although we're still using this in production at SAPO, we're moving to [an Android-based solution][an] due to the lack of accelerated web page rendering on the [Raspberry Pi][rpi].
+
+As such, we don't plan on developing this further except for bugfixes and "tactical" enhancements, since it's still very easy to use and deploy for relatively static displays.
+
+
 ## UPDATE (OCT 1ST 2013):
 
-In an attempt to go for an even smaller footprint, we're switching from [Raspbian][rp] to [Moebius][mb] 1.1.1. 
+In an attempt to go for an even smaller footprint, we've switched from [Raspbian][rp] to [Moebius][mb] 1.1.1. 
 
 [Moebius][mb] is significantly smaller (it's aimed at embedded deployments) and assumes no desktop environment is installed (it doesn't even ship with X11), so it makes a lot more sense for digital signage.
 
-We're also building out a separate (private) branch aimed at video-only signage, since there are currently no "good enough" options for accelerated web page rendering on the [Raspberry Pi][rpi] (something that an Android version might have fixed well enough for general use).
 
 ## SETTING UP FOR TESTING AND DEVELOPMENT
 
@@ -25,13 +31,11 @@ This code was developed internally at SAPO for running the [Codebits 2012](cb)
 signage atop [Raspberry Pi][rpi] devices, and quickly evolved from a guerrilla 
 solution into a full-blown client-server app.
 
-This is going to be version 2.0 - version 1.0 is being used internally at SAPO 
-since October 2012 and will be replaced by this (and a few custom add-ons) 
-once it's finished.
+This is version 2.0 - version 1.0 was used internally at SAPO since October 2012, and 2.0 was deployed mid-2013 before we switched to a simpler video-only solution based on [MEO Kanal](http://kanal.pt) also using [Raspberry Pi][rpi] hardware.
 
-Here's a brief summary of the requirements and their impact on solution design:
+Here's a brief summary of the original requirements and their impact on solution design:
 
-- clients are not supposed to store any content locally, _except_ a handful 
+- clients were not supposed to store any content locally, _except_ a handful 
   of templates to render baseline content. The idea here is that you'll be 
   running this against a set of web services or a full web server that will 
   render pages to the devices.
@@ -68,7 +72,7 @@ Here's a brief summary of the requirements and their impact on solution design:
 
 ## INSTALLATION
 
-The following steps assume you're deploying on the [Raspberry Pi][rpi] as the `pi` user and starting from a clean [Moebius][mb] install.
+The following steps assume you're deploying on the [Raspberry Pi][rpi] as the `root` user and starting from a clean [Moebius][mb] install.
 
 * Bring your image up to date and install required packages (some of these are only required for development and testing, but they add little to the overall footprint):
 
@@ -144,15 +148,15 @@ The 12fps framerate was chosen beause it yields <10MB files at 1280x720 resoluti
 
 ## SECURITY CONSIDERATIONS
 
-[Moebius][mb] differs from [Raspbian][rp] in not providing a `pi` user. Given that a signage client carries relatively few security risks (it's physically exposed and thus essentially compromisable from the moment you deploy it), running everything as `root` doesn't pose any significant extra risks.
+[Moebius][mb] differs from [Raspbian][rp] in not providing a `pi` user. Given that a signage client does not provide any services (even though it is physically exposed and thus essentially compromisable from the moment you deploy it), running everything as `root` doesn't pose any significant extra risks and significantly simplifies matters.
 
 However, the following are basic security precautions you should follow:
 
 * **RECOMMENDED:** change the `root` user password (it's `raspi` in the default [Moebius][mb] setup, in case you're wondering).
 
-* **RECOMMENDED**: Disable `sshd` password authentication and root login in `dropbear`.
+* **RECOMMENDED**: Disable `sshd` password authentication for the root login in `dropbear`.
 
-* **RECOMMENDED**: Set up a separate `admin` user with `sudo` privileges and add your public key to `/home/admin/.ssh/authorized_keys` for remote maintenance.
+* **RECOMMENDED**: Set up SSH access and add your public key to `/home/root/.ssh/authorized_keys` for remote maintenance.
 
 * **OPTIONAL**: change `sshd` to run on another port (even with `denyhosts`, it makes sense for some deployments) or block port 22 access from everywhere but the address(es) you'll be managing these from.
 
@@ -187,6 +191,7 @@ A few photos of this in action: [1](http://fotos.sapo.pt/ndantas/fotos/?uid=HrC4
 
 As common courtesy, we ask you to preserve (and contribute to) source code comments, attributions and this `README` if you decide to fork, deploy or otherwise redistribute this software.
 
+[an]: https://github.com/sapo/android-signage-client
 [cb]: https://codebits.eu
 [rpi]: http://www.raspberrypi.org
 [b1]: https://codebits.eu/s/blog/c89f80ca02910f48ac4cede8c3ce5cd7
