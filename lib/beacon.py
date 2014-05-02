@@ -24,10 +24,9 @@ queue = Queue()
 class Beacon(threading.Thread):
     """Beacon thread that talks to the server and tries to obtain commands."""
 
-    def __init__(self, mac_address, ip_address, browser = None, poll_interval = 11):
+    def __init__(self, mac_address, browser = None, poll_interval = 11):
         threading.Thread.__init__(self)
         self.mac_address    = mac_address
-        self.ip_address     = ip_address
         self.poll_interval  = poll_interval
         self.browser        = browser
         self.local_uri      = 'http://%s:%s' % (settings.http.bind_address, settings.http.port)
@@ -147,7 +146,7 @@ class Beacon(threading.Thread):
                 data = {
                     'playlist'    : settings.content.playlist_name,
                     'mac_address' : self.mac_address,
-                    'ip_address'  : self.ip_address,
+                    'ip_address'  : utils.get_ip_address(),
                     'cpu_freq'    : utils.get_cpu_freq(),
                     'cpu_temp'    : utils.get_cpu_temp(),
                     'cpu_usage'   : utils.get_cpu_usage(),

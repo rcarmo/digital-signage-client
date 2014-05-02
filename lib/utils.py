@@ -165,7 +165,6 @@ def get_mac_address(dev="eth0"):
     return open('/sys/class/net/%s/address' % dev, 'r').read().strip()
 
 
-@memoize
 def get_ip_address(dev="eth0"):
     """Retrieves the IP address for a given interface"""
 
