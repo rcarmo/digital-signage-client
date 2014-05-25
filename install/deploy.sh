@@ -19,13 +19,6 @@ cp gtkrc ~/.gtkrc-2.0
 # sane vim defaults for remote maintenance
 cp vimrc ~/.vimrc
 
-<<<<<<< HEAD
-# move .local to tmp
-rm -rf /tmp/.local
-rm -rf ~/.local
-mkdir /tmp/.local
-ln -s /tmp/.local ~/.local
-=======
 # boot animation
 sudo cp bootsplash.sh /etc/init.d/bootsplash
 sudo chmod +x /etc/init.d/bootsplash
@@ -35,4 +28,3 @@ sudo update-rc.d bootsplash defaults
 sudo cp digital-signage-client.sh /etc/init.d/digital-signage-client
 sudo chmod +x /etc/init.d/digital-signage-client
 sudo update-rc.d digital-signage-client defaults
->>>>>>> moebius
