@@ -15,6 +15,13 @@ do_start () {
     chvt 3 
     # play the ready animation
     cd /tmp
+    
+    # move .local to tmp
+    rm -rf /tmp/.local
+    rm -rf /root/.local
+    mkdir /tmp/.local
+    ln -s /tmp/.local /root/.local
+
     killall -9 omxplayer.bin > /dev/null 2>&1 
     NOREFRESH=1 /usr/bin/omxplayer /root/ready.mov > /dev/null 2>&1 &
     # set the background
