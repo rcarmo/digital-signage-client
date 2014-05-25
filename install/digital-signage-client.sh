@@ -27,9 +27,10 @@ do_start () {
     # set the background
     sleep 5
     /usr/bin/fbi -1 -t 60 -d /dev/fb0 -T 3 -noverbose -a /root/blank.png > /dev/null 2>&1 &
-    # get the client going
-    cd /root/digital-signage-client
-    python ./app.py > /dev/null 2>&1 & 
+    # get the client going indirectly via starting X
+    startx &
+    #cd /root/digital-signage-client
+    #python ./app.py > /dev/null 2>&1 & 
     exit 0
 }
 
