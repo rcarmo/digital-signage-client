@@ -111,6 +111,8 @@ This will undo any automatic detection done during the boot process and signific
 
 * Copy `etc/config.json.dist` to `etc/config.json`, making any required changes
 * run `install/deploy.sh` to setup the configuration files and startup scripts
+* 
+* **RECOMMENDED**: Check the startup scripts and add corresponding video and image files for your splash screen (if any).
 
 * **RECOMMENDED**: use Hexxeh's [rpi-update](https://github.com/Hexxeh/rpi-update) to upgrade to the latest firmware and kernel
 
