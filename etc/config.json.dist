@@ -1,7 +1,7 @@
 {
     "#": "example configuration file with (mostly sane) defaults",
     "debug": true,
-    "staging": true,
+    "staging": false,
     "interface": "eth0",
     "platform": "pi",
     "http": {
