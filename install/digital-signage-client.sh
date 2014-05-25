@@ -24,10 +24,12 @@ do_start () {
 
     killall -9 omxplayer.bin > /dev/null 2>&1 
     NOREFRESH=1 /usr/bin/omxplayer /root/ready.mov > /dev/null 2>&1 &
-    # set the background
     sleep 5
+    # set background
     /usr/bin/fbi -1 -t 60 -d /dev/fb0 -T 3 -noverbose -a /root/blank.png > /dev/null 2>&1 &
     # get the client going indirectly via starting X
+    sleep 1
+    fbset -xres 1280 -yres 720
     startx &
     #cd /root/digital-signage-client
     #python ./app.py > /dev/null 2>&1 & 
