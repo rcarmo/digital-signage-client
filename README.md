@@ -110,11 +110,13 @@ This will undo any automatic detection done during the boot process and signific
         cd digital-signage-client
 
 * Copy `etc/config.json.dist` to `etc/config.json`, making any required changes
-* run `install/deploy.sh` to setup the configuration files and startup scripts
-* 
+* Run `install/deploy.sh` to setup the configuration files and startup scripts
+ 
 * **RECOMMENDED**: Check the startup scripts and add corresponding video and image files for your splash screen (if any).
 
 * **RECOMMENDED**: use Hexxeh's [rpi-update](https://github.com/Hexxeh/rpi-update) to upgrade to the latest firmware and kernel
+
+* **RECOMMENDED**: run `sudo dpkg-reconfigure tzdata` and choose your timezone 
 
 * **RECOMMENDED**: enable the [Raspberry Pi][rpi]'s hardware watchdog so that it will automatically reset the board upon freezing:
 
