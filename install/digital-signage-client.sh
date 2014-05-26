@@ -10,6 +10,8 @@
 # Description:       Show ready splashscreen
 ### END INIT INFO
 
+# Default-Start should possibly be 2 3 4 5 because update-rc.d throws a warning
+
 do_start () {
     # change to a different, blank console
     chvt 3 
@@ -30,9 +32,9 @@ do_start () {
     # get the client going indirectly via starting X
     sleep 1
     fbset -xres 1280 -yres 720
-    startx &
-    #cd /root/digital-signage-client
-    #python ./app.py > /dev/null 2>&1 & 
+    # won't cd to /root otherwise, and won't run .xinitrc there
+    sudo -u root startx &
+    # a chvt may be needed here: need to ctrl-alt-f1 manually
     exit 0
 }
 

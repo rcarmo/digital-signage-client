@@ -9,7 +9,7 @@
         "port"        : 8000
     },
     "cookies": {
-        "#": "site: [{},{}] pairs listing cookies we want to set for specific sites",
+        "#": "site: [{},{}] pairs listing cookies we want to set for specific sites"
     },
     "#": "if server_url is not set, we'll operate in standalone mode",
     "_server_url": "http://signage.local/api/beacon",

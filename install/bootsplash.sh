@@ -10,6 +10,8 @@
 # Description:       Show boot splashscreen
 ### END INIT INFO
 
+# Default-Start should possibly be 2 3 4 5 because update-rc.d throws a warning
+
 do_start () {
     # change to a new (blank) console
     chvt 3
