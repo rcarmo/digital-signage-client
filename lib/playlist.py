@@ -10,6 +10,7 @@ License: MIT (see LICENSE for details)
 import os, sys, time, threading, json, random, logging, subprocess
 from Queue import Queue, Empty
 import app, beacon, utils, browser, video
+from keylistener import KeyListener
 from config import settings
 import urlparse
 
@@ -123,9 +124,17 @@ class Player(threading.Thread):
         log.info('Waiting %ds...' % self.start_interval)
         time.sleep(self.start_interval)
         log.info('Starting playlist')
+
+        background = KeyListener(self)
+        background.start()
+
         while(app.running):
             log.debug("Current playlist: %s" % self.playlist)
-            for item in self.playlist['screens']:
+            
+            self.index = 0
+            self.size = len(self.playlist['screens'])
+
+            while(self.index < self.size):
                 # reset shared data
                 try:
                     server_item = beacon.queue.get_nowait()
@@ -137,7 +146,10 @@ class Player(threading.Thread):
                         break
                 except Empty:
                     pass
-                log.debug("Current item: %s" % item)
+                item = self.playlist['screens'][self.index]
+                log.debug("Current item: %s" % self.index)
                 if app.running: # state may have changed
                     self.handle_item(item)
+
+                self.index += 1
         log.info("Exiting player thread.")
