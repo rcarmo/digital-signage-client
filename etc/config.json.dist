@@ -2,6 +2,8 @@
     "#": "example configuration file with (mostly sane) defaults",
     "debug": true,
     "staging": true,
+    "inputlistener": false,
+    "inputdevice": "/dev/input/event0",
     "interface": "eth0",
     "platform": "pi",
     "http": {

@@ -125,8 +125,9 @@ class Player(threading.Thread):
         time.sleep(self.start_interval)
         log.info('Starting playlist')
 
-        background = KeyListener(self)
-        background.start()
+        if settings.inputlistener and KeyListener.device_available:
+            background = KeyListener(self)
+            background.start()
 
         while(app.running):
             log.debug("Current playlist: %s" % self.playlist)
