@@ -160,7 +160,7 @@ However, the following are basic security precautions you should follow:
 
 * **RECOMMENDED**: Disable `sshd` password authentication for the root login in `dropbear`.
 
-* **RECOMMENDED**: Set up SSH access and add your public key to `/home/root/.ssh/authorized_keys` for remote maintenance.
+* **RECOMMENDED**: Set up SSH access and add your public key to `/home/home/pi/.ssh/authorized_keys` for remote maintenance.
 
 * **OPTIONAL**: change `sshd` to run on another port (even with `denyhosts`, it makes sense for some deployments) or block port 22 access from everywhere but the address(es) you'll be managing these from.
 

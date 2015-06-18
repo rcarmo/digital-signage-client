@@ -20,15 +20,15 @@ do_start () {
     
     # move .local to tmp
     rm -rf /tmp/.local
-    rm -rf /root/.local
+    rm -rf /home/pi/.local
     mkdir /tmp/.local
-    ln -s /tmp/.local /root/.local
+    ln -s /tmp/.local /home/pi/.local
 
     killall -9 omxplayer.bin > /dev/null 2>&1 
-    NOREFRESH=1 /usr/bin/omxplayer /root/ready.mov > /dev/null 2>&1 &
+    NOREFRESH=1 /usr/bin/omxplayer /home/pi/ready.mov > /dev/null 2>&1 &
     sleep 5
     # set background
-    /usr/bin/fbi -1 -t 60 -d /dev/fb0 -T 3 -noverbose -a /root/blank.png > /dev/null 2>&1 &
+    /usr/bin/fbi -1 -t 60 -d /dev/fb0 -T 3 -noverbose -a /home/pi/blank.png > /dev/null 2>&1 &
     # get the client going indirectly via starting X
     sleep 1
     fbset -xres 1280 -yres 720
