@@ -16,6 +16,12 @@
             "video": [
                 { "file": "http://remote.host/movie.mp4" }
             ]
-        }
+        },
+        "keys": {
+            "KEY_W": 1,
+            "KEY_S": 2,
+            "KEY_D": 5,
+            "KEY_G": 7
+         }
     }
 }
