@@ -1,12 +1,15 @@
-SAPO DIGITAL SIGNAGE CLIENT
+RASPBERRY PI DIGITAL SIGNAGE CLIENT
 ===========================
 
-## PROJECT STATUS (MAY 2ND 2014):
+## PROJECT STATUS (SEPTEMBER 2016):
 
-Although we're still using this in production at SAPO, we're moving to [an Android-based solution][an] due to the lack of accelerated web page rendering on the [Raspberry Pi][rpi].
+This repository is an attempt to clean up and merge assorted patches to the original project, as well as taking back ownership (after all, it was originally developed by myself at SAPO).
 
-As such, we don't plan on developing this further except for bugfixes and "tactical" enhancements, since it's still very easy to use and deploy for relatively static displays.
+Back in 2014, this was discontinued in favor of [an Android-based solution][an] due to the lack of accelerated web page rendering on the [Raspberry Pi][rpi].
 
+However, it is still useful for "tactical" enhancements, since it's still very easy to use and deploy for relatively static displays.
+
+Over the years, however, a number of changes have taken place in core components, so this repository may not actually work on Raspbpian/Minibian 8 - your mileage may vary.
 
 ## UPDATE (OCT 1ST 2013):
 
