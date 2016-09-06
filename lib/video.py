@@ -44,14 +44,17 @@ class Player:
 
     def terminate(self):
         """Kill the player (softly)"""
-        # Send a quit command to omxplayer -- this _finally_ works properly in the latest versions
-        output = self.omxplayer.communicate('q')[0]
-        log.debug("omxplayer: %s" % output.replace('\n',' '))
-        # try to quit the process normally in case the usual exit message isn't there.
-        # in my experience omxplayer is notoriously flaky, so this sometimes doesn't work
-        if "nice day" not in output:
-            log.debug("Terminating player")
-            self.omxplayer.terminate()
+        if(self.omxplayer is not None and self.omxplayer.returncode is None):
+            # Send a quit command to omxplayer -- this _finally_ works properly in the latest versions
+            output = self.omxplayer.communicate('q')[0]
+            log.debug("omxplayer: %s" % output.replace('\n',' '))
+            # try to quit the process normally in case the usual exit message isn't there.
+            # in my experience omxplayer is notoriously flaky, so this sometimes doesn't work
+            if "nice day" not in output:
+                log.debug("Terminating player")
+                self.omxplayer.terminate()
+
+        self.omxplayer = None
 
 
     def kill(self):

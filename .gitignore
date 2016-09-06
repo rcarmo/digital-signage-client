@@ -1,5 +1,6 @@
 # Mac stuff
 .DS_Store
+.idea/
 
 # Python objects
 *.py[cod]
